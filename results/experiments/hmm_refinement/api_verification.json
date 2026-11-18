@@ -1,0 +1,77 @@
+{
+  "bundle": "v0.1.2",
+  "partition": "student_test",
+  "matches_refinement_experiment": true,
+  "trips": [
+    {
+      "trip_id": "00000000",
+      "request_id": "7fe37c67-c86a-495b-a045-3950ac5949bb",
+      "observations": 2503,
+      "score": 0.9848010728654448,
+      "route_parts": 3
+    },
+    {
+      "trip_id": "00000007",
+      "request_id": "e6a8de45-42d9-4b2a-bdec-f54afeb7e048",
+      "observations": 1354,
+      "score": 0.8417207792207793,
+      "route_parts": 1
+    },
+    {
+      "trip_id": "00000009",
+      "request_id": "75e2b66b-1dec-4214-8081-33299cb5f3c3",
+      "observations": 1049,
+      "score": 0.9308855291576674,
+      "route_parts": 1
+    },
+    {
+      "trip_id": "00000040",
+      "request_id": "36c57cfe-0d1d-4aab-a1c4-2b3012fc5ac2",
+      "observations": 2995,
+      "score": 0.9616613418530351,
+      "route_parts": 2
+    },
+    {
+      "trip_id": "00000052",
+      "request_id": "df8254ac-c9a1-4b92-9707-42ca451359ea",
+      "observations": 262,
+      "score": 1.0,
+      "route_parts": 1
+    },
+    {
+      "trip_id": "00000056",
+      "request_id": "f0b2a6da-352e-4c5c-95bd-83987e7049e6",
+      "observations": 3958,
+      "score": 0.9486007995431183,
+      "route_parts": 3
+    },
+    {
+      "trip_id": "00000065",
+      "request_id": "925cc8ee-784a-4db1-99af-525bc13893a6",
+      "observations": 768,
+      "score": 0.9870801033591732,
+      "route_parts": 4
+    },
+    {
+      "trip_id": "00000076",
+      "request_id": "cc92c5fd-8456-4b2d-9cc3-d4898bdb29e7",
+      "observations": 1486,
+      "score": 0.9850187265917603,
+      "route_parts": 1
+    },
+    {
+      "trip_id": "00000077",
+      "request_id": "85622ded-5f16-4b13-859a-8290200d6c26",
+      "observations": 3911,
+      "score": 0.80620884289746,
+      "route_parts": 1
+    },
+    {
+      "trip_id": "00000091",
+      "request_id": "ec9c3366-a73a-4805-9e5a-83a88f95ae71",
+      "observations": 874,
+      "score": 0.9060869565217391,
+      "route_parts": 1
+    }
+  ]
+}

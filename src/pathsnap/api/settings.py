@@ -34,7 +34,7 @@ class Settings:
         if partition not in {'student_test','evaluator_test'}:raise ValueError('Unsupported serving partition')
         archive='../Provided_Material/Student folder.zip' if partition=='student_test' else Path.home()/'Downloads/evaluator_test.zip'
         registry='configs/student_registry.json' if partition=='student_test' else 'configs/evaluator_registry.json'
-        return cls(bundle_dir=path('PATHSNAP_BUNDLE_DIR','artifacts/releases/pathsnap-v0.1.1'),
+        return cls(bundle_dir=path('PATHSNAP_BUNDLE_DIR','artifacts/releases/pathsnap-v0.1.2'),
                    archive_path=path('PATHSNAP_DATA_ARCHIVE',archive),registry_path=path('PATHSNAP_TRIP_REGISTRY',registry),
                    reference_config_path=path('PATHSNAP_REFERENCE_CONFIG','configs/preprocessing.json'),partition=partition,
                    enable_evaluator_inference=boolean('PATHSNAP_ENABLE_EVALUATOR_INFERENCE',False),

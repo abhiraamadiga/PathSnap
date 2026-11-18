@@ -21,7 +21,7 @@
       <button data-drawer="layers-drawer" aria-controls="layers-drawer" aria-expanded="false">▱ <span>Layers</span></button>
     </nav>
     <section class="accuracy-card surface" aria-label="Accuracy summary" aria-live="polite">
-      <div class="accuracy-heading"><span class="eyebrow">ACCURACY</span><span id="accuracy-trip" class="accuracy-trip">Select a trip</span></div>
+      <div class="accuracy-heading"><span class="eyebrow">ACCURACY · AFTER HMM</span><span id="accuracy-trip" class="accuracy-trip">Select a trip</span></div>
       <strong id="metric-agreement">—</strong><span class="accuracy-definition">HMM weak-reference agreement</span><small id="metric-agreement-note">Run a trip to see its score</small>
       <button class="score-details" data-drawer="results-drawer" aria-controls="results-drawer" aria-expanded="false">Score details ↗</button>
     </section>
@@ -57,14 +57,14 @@
     <section class="metric-grid" aria-label="Prediction summary"><article class="metric"><span>GPS observations</span><strong id="metric-gps">—</strong><small id="metric-gps-note">Original observation count</small></article><article class="metric"><span>Route parts</span><strong id="metric-parts">—</strong><small>Breaks remain separate</small></article><article class="metric"><span>Prediction runtime</span><strong id="metric-time">—</strong><small>Model + route reconstruction</small></article></section>      <section id="evaluation-card" class="evaluation-card" hidden>
         <div class="section-heading"><h3>Evaluation results</h3><span id="scoring-status" class="tag"></span></div>
         <p id="evaluation-note" class="helper"></p>
-        <div class="detail-grid"><div><span>Classifier agreement</span><strong id="eval-classifier">—</strong></div><div><span>Reference coverage</span><strong id="eval-coverage">—</strong></div><div><span>Route edit similarity</span><strong id="eval-sequence">—</strong></div><div><span>Road overlap F1</span><strong id="eval-overlap">—</strong></div></div>
+        <div class="detail-grid"><div><span>Before HMM · Random Forest</span><strong id="eval-classifier">—</strong></div><div><span>After HMM · Viterbi</span><strong id="eval-hmm">—</strong></div><div><span>Change after HMM</span><strong id="eval-delta">—</strong></div><div><span>Reference coverage</span><strong id="eval-coverage">—</strong></div><div><span>Route edit similarity</span><strong id="eval-sequence">—</strong></div><div><span>Road overlap F1</span><strong id="eval-overlap">—</strong></div></div>
         <div class="result-actions"><details><summary>Request & diagnostics</summary><dl id="diagnostics"></dl></details><button id="download-button" class="small-button" disabled>Download result JSON</button></div>
       </section>
 </div></dialog>
   <dialog id="layers-drawer" class="drawer" aria-labelledby="layers-heading"><header class="drawer-heading"><h2 id="layers-heading">Map layers</h2><button class="close-drawer" aria-label="Close layers drawer">×</button></header><div class="drawer-body">
     <div class="eyebrow">OVERLAYS</div><div class="legend"><label><input id="layer-gps" type="checkbox" checked disabled><span class="dot gps"></span>GPS points</label><label><input id="layer-route" type="checkbox" checked disabled><span class="line route"></span>Predicted route</label></div>
-    <label for="basemap-select" class="field-label">Basemap</label><select id="basemap-select"><option value="none">Offline grid</option><option value="street">Street · OpenStreetMap</option><option value="satellite">Satellite · Esri World Imagery</option></select>
-    <p class="helper">Street and satellite views require internet and request the visible map area from the selected provider. GPS and route overlays work offline.</p><p id="basemap-status" class="helper" role="status" aria-live="polite">Offline grid · no external tiles</p>
+    <label for="basemap-select" class="field-label">Basemap</label><select id="basemap-select"><option value="street" selected>Street · OpenStreetMap</option><option value="satellite">Satellite · Esri World Imagery</option><option value="none">Offline grid</option></select>
+    <p class="helper">Street and satellite views require internet and request the visible map area from the selected provider. GPS and route overlays work offline.</p><p id="basemap-status" class="helper" role="status" aria-live="polite">Loading OpenStreetMap…</p>
     <p class="helper">Imagery: Esri, Vantor/Maxar, Earthstar Geographics and the GIS User Community. <a href="https://doc.arcgis.com/en/data-appliance/2025/maps/world-imagery.htm" target="_blank" rel="noopener">Imagery information ↗</a></p>
     <div class="pipeline-note"><span class="eyebrow">READING THE MAP</span><p>Blue dots are GPS readings. Purple lines are reconstructed roads. Separate route parts remain separate.</p></div>
   </div></dialog>

@@ -1,8 +1,10 @@
 {
   "beta_candidates_m": [
     25.0,
-    50.0,
-    100.0
+    10.0,
+    15.0,
+    20.0,
+    35.0
   ],
   "selection_metric": "mean_trip_weak_reference_top1",
   "selection_student_trip_ids": [
@@ -26,12 +28,14 @@
   "max_route_distance_m": 5000.0,
   "routing_cache_sources": 128,
   "emission_epsilon": 1e-09,
-  "beta_m": 25.0,
+  "beta_m": 15.0,
   "selection_means": {
-    "25.0": 0.939169631199567,
-    "50.0": 0.9343982178510724,
-    "100.0": 0.9309109163980744
+    "25": 0.9391696311995671,
+    "10": 0.9436254004626601,
+    "15": 0.9438137446193853,
+    "20": 0.9406252719368066,
+    "35": 0.9388270712105352
   },
-  "stage": "development_selected_hmm",
+  "stage": "development_refined_hmm",
   "classifier_config": "configs/tuned_model.json"
 }

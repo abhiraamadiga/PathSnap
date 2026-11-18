@@ -2,10 +2,10 @@
 
 ## Install and start on Laptop 1
 
-Use the Python 3.14 environment matching the Step 9 bundle. If needed, extract the trusted inference ZIP into `artifacts/releases/` so `pathsnap-v0.1.1/manifest.json` and `model.joblib` exist. From the repository root:
+Use the Python 3.14 environment matching the inference bundle. If needed, extract the trusted inference ZIP into `artifacts/releases/` so `pathsnap-v0.1.2/manifest.json` and `model.joblib` exist. From the repository root:
 
 ```bash
-python -m pip install -r artifacts/releases/pathsnap-v0.1.1/requirements.txt
+python -m pip install -r artifacts/releases/pathsnap-v0.1.2/requirements.txt
 python -m pip install -r configs/api-requirements.txt
 python -m pip install -e '.[api]'
 cp .env.example .env
@@ -91,6 +91,7 @@ Keep the receiving server terminal visible. The saved JSON contains public predi
 python -m pip install -r configs/api-test-requirements.txt
 python -m pip install -e '.[api-test]'
 python -m unittest discover -s tests -v
+# Run the baseline check against an API started with the v0.1.1 bundle.
 python scripts/verify_api.py --base-url http://127.0.0.1:8000
 ```
 

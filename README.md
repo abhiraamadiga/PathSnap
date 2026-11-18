@@ -84,7 +84,7 @@ See [decoder method and reproduction](docs/hmm-viterbi.md) and [measured results
 
 ## Inference bundle (Step 9)
 
-See [export, standalone prediction and verification](docs/inference-export.md). Export a versioned model/config/runtime ZIP with `python -m pathsnap.inference.export --version v0.1.1` after installing `.[inference,export]`. The verified release contains no datasets or reference labels; the supplied bundle requires Python 3.14 and its pinned dependencies.
+See [export, standalone prediction and verification](docs/inference-export.md). Export a versioned model/config/runtime ZIP with `python -m pathsnap.inference.export --version v0.1.2` after installing `.[inference,export]`. The verified release contains no datasets or reference labels; the supplied bundle requires Python 3.14 and its pinned dependencies.
 
 ## FastAPI backend (Step 10)
 
@@ -97,3 +97,5 @@ See [UI setup, data boundaries and verification](docs/ui.md). Start Laptop 2 wit
 ## Integration and deployment (Step 12)
 
 See [local verification and two-laptop instructions](docs/deployment.md). All ten development trips reproduce 19,160 earlier predictions and aggregate scores. Browser/UI, asset and CORS checks pass locally. Physical two-laptop verification is deferred; final evaluator inference has not been run.
+
+The [decoder refinement](docs/hmm-results.md#decoder-refinement-v012) raises pooled development weak-reference agreement to 92.42%. The API defaults to inference bundle v0.1.2.

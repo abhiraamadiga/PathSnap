@@ -6,13 +6,14 @@ The full-screen UI and frozen v0.1.1 API are integrated locally. All ten student
 
 ## Laptop 1: model, API and private scoring
 
-Use the source checkout with the trusted `artifacts/releases/pathsnap-v0.1.1` bundle and original dataset archive. Keep datasets, reference routes and weights on this laptop. The release requires Python 3.14 and its pinned runtime dependencies; follow `docs/api.md` for initial installation. From the repository root in Bash:
+Use the source checkout with the trusted `artifacts/releases/pathsnap-v0.1.2` bundle and original dataset archive. Keep datasets, reference routes and weights on this laptop. The release requires Python 3.14 and its pinned runtime dependencies; follow `docs/api.md` for initial installation. From the repository root in Bash:
 
 ```bash
 source .venv/bin/activate
-python -m pip install -r artifacts/releases/pathsnap-v0.1.1/requirements.txt
+python -m pip install -r artifacts/releases/pathsnap-v0.1.2/requirements.txt
 python -m pip install -r configs/api-requirements.txt
 python -m pip install -e .
+export PATHSNAP_BUNDLE_DIR=artifacts/releases/pathsnap-v0.1.2
 export PATHSNAP_PARTITION=student_test
 export PATHSNAP_DATA_ARCHIVE="../Provided_Material/Student folder.zip"
 export PATHSNAP_TRIP_REGISTRY=configs/student_registry.json
@@ -77,4 +78,4 @@ python scripts/verify_deployment.py --api-url http://127.0.0.1:8000 --ui-url htt
 python scripts/verify_api.py --base-url http://127.0.0.1:8000 --report results/experiments/integration/predictions.json
 ```
 
-The final command is a development-only ten-trip regression check and refuses evaluator mode. Run it while no one is requesting predictions: the API intentionally permits one prediction at a time. These checks reproduce evidence, not new model experiments.
+The final command reproduces the original v0.1.1 evidence above. Start the API with PATHSNAP_BUNDLE_DIR=artifacts/releases/pathsnap-v0.1.1 for that check. The current v0.1.2 refinement has separate development evidence in results/experiments/hmm_refinement/. Run it while no one is requesting predictions: the API intentionally permits one prediction at a time. These checks reproduce evidence, not new model experiments.

@@ -27,37 +27,82 @@ function clearResult() {
   $('evaluation-card').hidden = true; $('download-button').disabled = true;
   $('fit-button').disabled = true; $('layer-gps').disabled = true; $('layer-route').disabled = true;
   $('map-empty').hidden = false;
-  $('map-empty').querySelector('strong').textContent = 'Your route will appear here';
-  $('map-empty').querySelector('p').textContent = 'Open Trips to choose a trip and run reconstruction.';
+  if (map) {
+    $('map-empty').querySelector('strong').textContent = 'Your route will appear here';
+    $('map-empty').querySelector('p').textContent = 'Open Trips to choose a trip and run reconstruction.';
+  }
   $('map-summary').textContent = 'No trip loaded · choose a trip in Trips';
   $('result-title').textContent = state.trips.length ? `Trip ${$('trip-select').value}` : 'Ready for a trip.';
   $('result-subtitle').textContent = state.trips.length ? 'Ready to reconstruct from the original GPS observations.' : 'Connect to the API to begin.';
 }
-function initialiseMap() {
-  if (!globalThis.L) { message('The local map assets could not load. Refresh the page or check the UI installation.', 'error'); return; }
-  map = L.map('map', { preferCanvas: true, zoomControl: true }).setView([20, 0], 2);
-  gpsLayer = L.featureGroup().addTo(map); routeLayer = L.featureGroup().addTo(map);
-  $('layer-gps').addEventListener('change', () => $('layer-gps').checked ? gpsLayer.addTo(map) : map.removeLayer(gpsLayer));
-  $('layer-route').addEventListener('change', () => $('layer-route').checked ? routeLayer.addTo(map) : map.removeLayer(routeLayer));
-  $('fit-button').addEventListener('click', () => { if (bounds?.isValid()) map.fitBounds(bounds.pad(.08), { maxZoom: 18 }); });
-  $('basemap-select').addEventListener('change', () => {
-    if (tiles) { map.removeLayer(tiles); tiles.off(); tiles = null; }
-    const mode = $('basemap-select').value;
-    if (mode === 'none') { $('basemap-status').textContent = 'Offline grid · no external tiles'; return; }
-    const satellite = mode === 'satellite';
-    const label = satellite ? 'Esri World Imagery' : 'OpenStreetMap';
-    let failed = false;
-    tiles = L.tileLayer(satellite
-      ? 'https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'
-      : 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: satellite ? 'Imagery © Esri, Vantor/Maxar, Earthstar Geographics, GIS User Community' : '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-      maxNativeZoom: 19, maxZoom: 19,
-    });
-    $('basemap-status').textContent = `Loading ${label}…`;
-    tiles.on('tileerror', () => { failed = true; $('basemap-status').textContent = `${label}: some tiles could not load. Check internet or use the offline grid.`; });
-    tiles.on('load', () => { if (!failed) $('basemap-status').textContent = `${label} · online`; });
-    tiles.addTo(map);
+const basemaps = {
+  street: {
+    label: 'OpenStreetMap',
+    url: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+    attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+  },
+  satellite: {
+    label: 'Esri World Imagery',
+    url: 'https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+    attribution: 'Imagery © Esri, Vantor/Maxar, Earthstar Geographics, GIS User Community',
+  },
+};
+
+function setBasemap(mode) {
+  const previous = tiles;
+  tiles = null;
+  // Leaflet uses the layer's own "remove" listener to unhook map events.
+  previous?.remove();
+  const provider = basemaps[mode];
+  if (!provider) {
+    $('basemap-status').textContent = 'Offline grid · no external tiles';
+    return;
+  }
+
+  const layer = L.tileLayer(provider.url, {
+    attribution: provider.attribution,
+    maxNativeZoom: 19,
+    maxZoom: 19,
   });
+  let failed = false;
+  layer.on('loading', () => {
+    if (tiles !== layer) return;
+    failed = false;
+    $('basemap-status').textContent = `Loading ${provider.label}…`;
+  });
+  layer.on('tileerror', () => {
+    if (tiles !== layer) return;
+    failed = true;
+    $('basemap-status').textContent = `${provider.label}: some tiles could not load. The route and offline grid are still available.`;
+  });
+  layer.on('load', () => {
+    if (tiles === layer && !failed) $('basemap-status').textContent = `${provider.label} · online`;
+  });
+  tiles = layer;
+  layer.addTo(map);
+}
+
+function fitRoute() {
+  if (bounds?.isValid()) map.fitBounds(bounds.pad(.08), { maxZoom: 18, animate: false });
+}
+
+function initialiseMap() {
+  if (!globalThis.L) {
+    $('basemap-select').disabled = true;
+    $('map-empty').querySelector('strong').textContent = 'Map could not load';
+    $('map-empty').querySelector('p').textContent = 'Reload the page or check that the local Leaflet files are installed.';
+    return;
+  }
+  map = L.map('map', { preferCanvas: true, minZoom: 1, maxZoom: 19 }).setView([20, 0], 2);
+  gpsLayer = L.featureGroup().addTo(map);
+  routeLayer = L.featureGroup().addTo(map);
+  $('layer-gps').addEventListener('change', () => $('layer-gps').checked ? gpsLayer.addTo(map) : gpsLayer.remove());
+  $('layer-route').addEventListener('change', () => $('layer-route').checked ? routeLayer.addTo(map) : routeLayer.remove());
+  $('fit-button').addEventListener('click', fitRoute);
+  const select = $('basemap-select');
+  select.value = 'street';
+  select.addEventListener('change', () => setBasemap(select.value));
+  setBasemap(select.value);
 }
 function tooltip(text) { const element = document.createElement('span'); element.textContent = text; return element; }
 function drawMap(body) {
@@ -75,8 +120,8 @@ function drawMap(body) {
     routeLayer.addLayer(layer);
     for (const line of part.geometry.coordinates) for (const [lon, lat] of line) bounds.extend([lat, lon]);
   });
-  if (bounds.isValid()) { map.fitBounds(bounds.pad(.08), { maxZoom: 18 }); $('map-empty').hidden = true; }
-  else { $('map-empty').hidden = false; $('map-empty').querySelector('strong').textContent = 'No drawable GPS or route points'; $('map-empty').querySelector('p').textContent = 'Inspect the observation diagnostics below.'; }
+  if (bounds.isValid()) { fitRoute(); $('map-empty').hidden = true; }
+  else { $('map-empty').hidden = false; $('map-empty').querySelector('strong').textContent = 'No drawable GPS or route points'; $('map-empty').querySelector('p').textContent = 'Open Results for the observation diagnostics.'; }
   $('fit-button').disabled = !bounds.isValid(); $('layer-gps').disabled = !plotted;
   $('layer-route').disabled = !body.prediction.route_parts.length;
   $('layer-gps').checked = true; $('layer-route').checked = true; gpsLayer.addTo(map); routeLayer.addTo(map);
@@ -91,12 +136,19 @@ function render(body) {
   $('metric-gps').textContent = prediction.observations.length.toLocaleString();
   $('metric-gps-note').textContent = `${prediction.diagnostics.invalid_observations || 0} invalid observations retained`;
   $('metric-agreement').textContent = percent(evaluation.hmm_weak_reference_top1);
-  $('metric-agreement-note').textContent = evaluation.status === 'ok' ? `${(evaluation.evaluated_observations || 0).toLocaleString()} scored / ${evaluation.total_observations.toLocaleString()} GPS · ${percent(evaluation.reference_coverage)} coverage` : 'Reference scoring unavailable';
+  $('metric-agreement-note').textContent = evaluation.status === 'ok' ? `${(evaluation.evaluated_observations || 0).toLocaleString()} scored / ${prediction.observations.length.toLocaleString()} GPS · ${percent(evaluation.reference_coverage)} coverage` : 'Reference scoring unavailable';
   $('metric-parts').textContent = prediction.route_parts.length.toLocaleString();
   $('metric-time').textContent = `${prediction.prediction_seconds.toFixed(2)} s`;
   $('scoring-status').textContent = { ok: 'Aggregate scoring', disabled: 'Scoring disabled', reference_unavailable: 'No reference available', invalid_reference: 'Reference could not be scored' }[evaluation.status] || 'Scoring unavailable';
   $('evaluation-note').textContent = evaluation.note;
   $('eval-classifier').textContent = percent(evaluation.classifier_weak_reference_top1);
+  $('eval-hmm').textContent = percent(evaluation.hmm_weak_reference_top1);
+  const before = evaluation.classifier_weak_reference_top1;
+  const after = evaluation.hmm_weak_reference_top1;
+  const delta = Number.isFinite(before) && Number.isFinite(after) ? (after - before) * 100 : null;
+  $('eval-delta').textContent = delta === null ? '—' : `${new Intl.NumberFormat(undefined, {
+    signDisplay: 'exceptZero', maximumFractionDigits: 2,
+  }).format(delta)} pp`;
   $('eval-coverage').textContent = percent(evaluation.reference_coverage);
   $('eval-sequence').textContent = percent(evaluation.reference_sequence_edit_similarity);
   $('eval-overlap').textContent = typeof evaluation.reference_arc_set_f1 === 'number' ? evaluation.reference_arc_set_f1.toFixed(3) : '—';
@@ -106,9 +158,14 @@ function render(body) {
     'No-candidate observations': prediction.diagnostics.no_candidate_observations ?? 'Unavailable', 'Transition resets': prediction.diagnostics.no_valid_transition_resets ?? 'Unavailable' };
   for (const [key, value] of Object.entries(details)) { const term = document.createElement('dt'), data = document.createElement('dd'); term.textContent = key; data.textContent = String(value); $('diagnostics').append(term, data); }
   $('evaluation-card').hidden = false; $('download-button').disabled = false;
-  drawMap(body);
-  if (evaluation.status !== 'ok') message('The route is available, but reference scoring is unavailable. No accuracy value has been invented.', 'info');
-  else message('');
+  try {
+    drawMap(body);
+  } catch (error) {
+    console.error('Route map rendering failed', error);
+    message('The map could not draw this route. Scores and the result download are available in Results.', 'error');
+    return;
+  }
+  message(evaluation.status === 'ok' ? '' : 'Reference scoring is unavailable for this trip.');
 }
 async function connect(event) {
   event?.preventDefault(); if (state.connecting || state.predicting) return;
@@ -159,7 +216,6 @@ $('download-button').addEventListener('click', () => {
 for (const trigger of document.querySelectorAll('[data-drawer]')) {
   trigger.addEventListener('click', () => {
     const drawer = $(trigger.dataset.drawer);
-    for (const other of document.querySelectorAll('dialog[open]')) other.close();
     drawer.showModal();
     for (const button of document.querySelectorAll('[data-drawer]')) button.setAttribute('aria-expanded', String(button.dataset.drawer === drawer.id));
   });

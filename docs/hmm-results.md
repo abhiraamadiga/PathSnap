@@ -45,3 +45,19 @@ These timings exclude file loading, graph construction, route expansion, referen
 Maps are in results/maps/hmm_viterbi/. Blue: GPS, green: supplied reference, orange: classifier reconstruction, purple: HMM reconstruction. Internet is required for Folium assets and tiles.
 
 No evaluator data was read or scored. Next: export the model/preprocessing/decoder inference assets, then implement and test the two-laptop API/UI.
+
+## Decoder refinement (v0.1.2)
+
+A follow-up search compared 10, 15, 20, and 35 metres with the original 25-metre setting. It selected **15 metres** by mean-trip weak-reference Top-1 on the same five selection trips. The other five development trips were checked after selection. Both groups have been used in earlier development. The reserved evaluator partition was excluded. The classifier weights and weak-label scoring procedure are the same as in v0.1.1.
+
+| Development metric | v0.1.1 (25 m) | v0.1.2 (15 m) |
+| --- | ---: | ---: |
+| Pooled weak-reference Top-1, all ten trips | 91.70% | 92.42% |
+| Mean-trip weak-reference Top-1, five selection trips | 93.92% | 94.38% |
+| Mean-trip weak-reference Top-1, five review trips | 92.03% | 92.66% |
+| Mean route edit similarity, all ten trips | 74.79% | 79.72% |
+| Direct continuity, all ten trips | 96.43% | 96.96% |
+
+Trip 00000077 rises from 78.41% to 80.62%. Trip 00000007 remains at 84.17% after decoding, down from 90.50% before HMM. Its sequence edit similarity rises from 44.16% before HMM to 96.77% afterward, and its route goes from 72 parts to one. Per-observation road IDs and the overall route sequence measure different aspects of the result. Trip 00000077 has only one candidate miss among 2,126 scored observations, so expanding the candidate search alone would have limited effect on that trip. Its reference coverage is 54.36%.
+
+Search and release evidence are stored in `results/experiments/hmm_refinement/`.
