@@ -21,6 +21,12 @@ class Settings:
     reference_scoring:bool=True
     cors_origins:tuple=('http://localhost:8501','http://127.0.0.1:8501')
 
+    cors_allow_private_network:bool=False
+
+    def __post_init__(self):
+        if self.cors_allow_private_network and (not self.cors_origins or '*' in self.cors_origins):
+            raise ValueError('Private-network CORS requires explicit UI origins')
+
     @property
     def inference_enabled(self):return self.partition!='evaluator_test' or self.enable_evaluator_inference
 
@@ -39,4 +45,5 @@ class Settings:
                    reference_config_path=path('PATHSNAP_REFERENCE_CONFIG','configs/preprocessing.json'),partition=partition,
                    enable_evaluator_inference=boolean('PATHSNAP_ENABLE_EVALUATOR_INFERENCE',False),
                    reference_scoring=boolean('PATHSNAP_REFERENCE_SCORING',True),
-                   cors_origins=tuple(v.strip() for v in os.getenv('PATHSNAP_CORS_ORIGINS','http://localhost:8501,http://127.0.0.1:8501').split(',') if v.strip()))
+                   cors_origins=tuple(v.strip() for v in os.getenv('PATHSNAP_CORS_ORIGINS','http://localhost:8501,http://127.0.0.1:8501').split(',') if v.strip()),
+                   cors_allow_private_network=boolean('PATHSNAP_CORS_ALLOW_PRIVATE_NETWORK',False))

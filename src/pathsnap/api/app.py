@@ -54,7 +54,12 @@ def create_app(settings=None,*,predictor_loader=load_bundle,scorer=score_predict
         logger.info('service_stopped')
 
     app=FastAPI(title='PathSnap API',version='0.1.0',lifespan=lifespan,description='Trip-ID inference with isolated aggregate reference scoring.')
-    app.add_middleware(CORSMiddleware,allow_origins=list(settings.cors_origins),allow_credentials=False,allow_methods=['GET','POST'],allow_headers=['Content-Type','X-Request-ID'])
+    private_network = {'allow_private_network': True} if settings.cors_allow_private_network else {}
+    app.add_middleware(
+        CORSMiddleware, allow_origins=list(settings.cors_origins), allow_credentials=False,
+        allow_methods=['GET', 'POST'], allow_headers=['Content-Type', 'X-Request-ID'],
+        **private_network,
+    )
 
     @app.middleware('http')
     async def request_log(request,call_next):

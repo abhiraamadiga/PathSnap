@@ -16,6 +16,7 @@ export PATHSNAP_DATA_ARCHIVE="$HOME/Downloads/evaluator_test.zip"
 export PATHSNAP_TRIP_REGISTRY=configs/evaluator_registry.json
 export PATHSNAP_ENABLE_EVALUATOR_INFERENCE=true
 export PATHSNAP_CORS_ORIGINS=http://127.0.0.1:8502,http://localhost:8502
+export PATHSNAP_CORS_ALLOW_PRIVATE_NETWORK=true
 python -m pathsnap.api --host 127.0.0.1 --port 8001
 ```
 

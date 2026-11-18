@@ -137,6 +137,23 @@ class APITests(unittest.TestCase):
             headers['Origin']='http://unlisted.example'
             self.assertNotIn('access-control-allow-origin',client.options('/predict',headers=headers).headers)
 
+    def test_private_network_preflight_requires_opt_in_and_allowed_origin(self):
+        headers = {'Origin': 'http://localhost:8501', 'Access-Control-Request-Method': 'POST',
+                   'Access-Control-Request-Private-Network': 'true'}
+        with self.running() as (client, _, _):
+            self.assertEqual(client.options('/predict', headers=headers).status_code, 400)
+        settings = replace(self.settings, cors_allow_private_network=True)
+        with self.running(settings) as (client, _, _):
+            response = client.options('/predict', headers=headers)
+            self.assertEqual(response.status_code, 200)
+            self.assertEqual(response.headers['access-control-allow-private-network'], 'true')
+            headers['Origin'] = 'http://unlisted.example'
+            response = client.options('/predict', headers=headers)
+            self.assertEqual(response.status_code, 400)
+            self.assertNotIn('access-control-allow-origin', response.headers)
+        with self.assertRaisesRegex(ValueError, 'explicit UI origins'):
+            replace(settings, cors_origins=('*',))
+
     def test_trip_store_prediction_reader_excludes_route(self):
         store=TripStore(self.archive,self.registry,'student_test');original=store.read
         def guarded(trip,kind):
