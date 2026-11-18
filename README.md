@@ -84,7 +84,7 @@ See [decoder method and reproduction](docs/hmm-viterbi.md) and [measured results
 
 ## Inference bundle
 
-Download [PathSnap inference bundle v0.1.3](https://github.com/abhiraamadiga/PathSnap/releases/tag/v0.1.3) and extract it into `artifacts/releases/` on the API laptop. The ZIP includes the trained Random Forest, HMM and preprocessing settings, a manifest, and pinned runtime dependencies. Use the handout datasets locally for inference and evaluation.
+Download the [PathSnap inference bundle v0.1.3 ZIP](https://raw.githubusercontent.com/abhiraamadiga/PathSnap/main/release-assets/pathsnap-v0.1.3.zip) or open the [release notes](https://github.com/abhiraamadiga/PathSnap/releases/tag/v0.1.3). Extract the ZIP into `artifacts/releases/` on the API laptop. The ZIP includes the trained Random Forest, HMM and preprocessing settings, a manifest, and pinned runtime dependencies. Use the handout datasets locally for inference and evaluation.
 
 Archive SHA-256: `41fe868104acda8658bef508618d00691a77a2646ce69468d4e1100ba6416a96`.
 

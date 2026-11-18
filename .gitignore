@@ -7,6 +7,8 @@
 /artifacts/**
 !/artifacts/.gitkeep
 *.zip
+# Verified inference artifact distributed with the public release.
+!/release-assets/pathsnap-v0.1.3.zip
 *.pkl
 *.pickle
 *.joblib
