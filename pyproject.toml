@@ -10,5 +10,8 @@ readme = "README.md"
 requires-python = ">=3.11"
 dependencies = []
 
+[project.optional-dependencies]
+eda = ["numpy>=1.26,<3", "matplotlib>=3.9,<4", "folium>=0.16,<1"]
+
 [tool.setuptools.packages.find]
 where = ["src"]

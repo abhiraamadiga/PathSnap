@@ -4,7 +4,7 @@ Map matching and route reconstruction from noisy vehicle GPS observations.
 
 ## Status
 
-Dataset loading and structural validation are implemented, with an inventory of all 90 provided development trips. Model training, feature engineering, decoding, API and UI remain pending. No trained artifacts or model performance claims are included.
+Dataset loading and structural validation are implemented, with an inventory of all 90 provided development trips. EDA statistics, plots and two interactive Folium maps are also available. Model training, feature engineering, decoding, API and UI remain pending. No trained artifacts or model performance claims are included.
 
 ## Local setup
 
@@ -57,3 +57,7 @@ Deliver a public GitHub repository and one consolidated PDF report. Commit all i
 ## Dataset validation
 
 See [dataset understanding](docs/dataset-understanding.md) for file relationships, reproduction commands, validation results and limitations. The loader supports the supplied ZIP and extracted directories without third-party dependencies.
+
+## Exploratory analysis
+
+See [EDA findings and reproduction commands](docs/eda-findings.md) for partition summaries, data-quality diagnostics, figures and interactive maps. Install the `eda` extra to reproduce this stage.
