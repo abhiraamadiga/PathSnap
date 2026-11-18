@@ -1,0 +1,26 @@
+{
+  "api_url": "http://127.0.0.1:8000",
+  "ui_url": "http://127.0.0.1:8501",
+  "bundle_version": "v0.1.1",
+  "partition": "student_test",
+  "trip_ids": [
+    "00000000",
+    "00000007",
+    "00000009",
+    "00000040",
+    "00000052",
+    "00000056",
+    "00000065",
+    "00000076",
+    "00000077",
+    "00000091"
+  ],
+  "inference_enabled": true,
+  "assets_available": true,
+  "ui_default_api_matches": true,
+  "cors_get_and_post_preflight": true,
+  "unexpected_origin_rejected": true,
+  "predictions_requested": 0,
+  "evaluator_payloads_requested": false,
+  "scope": "Connectivity from the machine running this command; does not prove a second physical laptop was used"
+}

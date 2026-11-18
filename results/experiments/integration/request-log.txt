@@ -1,0 +1,7 @@
+INFO:     127.0.0.1:51452 - "OPTIONS /predict HTTP/1.1" 200 OK
+2026-11-18 15:55:27,314 INFO request request_id=25af7cfe-bab7-4bc9-89e2-4bfcf92b202b method=OPTIONS path=/predict status=200 duration_ms=0.40
+2026-11-18 15:55:27,325 INFO inference_started request_id=9ef3928d-9ca1-4e0b-97ed-355a4a5cd624 trip_id=00000000
+2026-11-18 15:55:31,603 INFO inference_complete request_id=9ef3928d-9ca1-4e0b-97ed-355a4a5cd624 trip_id=00000000 observations=2503
+2026-11-18 15:55:31,603 INFO reference_scoring_started request_id=9ef3928d-9ca1-4e0b-97ed-355a4a5cd624 trip_id=00000000
+2026-11-18 15:55:32,476 INFO request request_id=9ef3928d-9ca1-4e0b-97ed-355a4a5cd624 method=POST path=/predict status=200 duration_ms=5153.29
+INFO:     127.0.0.1:51452 - "POST /predict HTTP/1.1" 200 OK

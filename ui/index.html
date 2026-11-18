@@ -10,13 +10,25 @@
   <script type="module" src="app.js"></script>
 </head>
 <body>
-  <header class="topbar">
-    <a class="brand" href="./" aria-label="PathSnap home"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M5 25V15a6 6 0 0 1 6-6h10a6 6 0 0 1 6 6v2"/><circle cx="5" cy="25" r="3"/><circle cx="27" cy="20" r="3"/></svg><span>PathSnap</span><span class="brand-caption">GPS → road routes</span></a>
-    <div class="top-right"><span id="connection-pill" class="pill"><i></i>Not connected</span><a id="api-docs" hidden target="_blank" rel="noopener">API docs ↗</a></div>
-  </header>
-  <div class="shell">
-    <aside class="sidebar" aria-label="Connection and trip controls">
-      <div class="eyebrow">EVALUATOR WORKSPACE</div>
+  <main class="map-stage" aria-label="Route explorer">
+    <div id="map" aria-label="GPS and reconstructed road route"></div>
+    <div id="map-empty" class="map-empty"><div class="empty-symbol" aria-hidden="true">⌁</div><strong>Your route will appear here</strong><p>Open Trips to choose a trip and run reconstruction.</p></div>
+    <header class="topbar surface">    <a class="brand" href="./" aria-label="PathSnap home"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M5 25V15a6 6 0 0 1 6-6h10a6 6 0 0 1 6 6v2"/><circle cx="5" cy="25" r="3"/><circle cx="27" cy="20" r="3"/></svg><span>PathSnap</span><span class="brand-caption">GPS → road routes</span></a>
+<span id="connection-pill" class="pill"><i></i>Not connected</span></header>
+    <nav class="drawer-nav surface" aria-label="Workspace drawers">
+      <button data-drawer="trips-drawer" aria-controls="trips-drawer" aria-expanded="false">↗ <span>Trips</span></button>
+      <button data-drawer="results-drawer" aria-controls="results-drawer" aria-expanded="false">▥ <span>Results</span></button>
+      <button data-drawer="layers-drawer" aria-controls="layers-drawer" aria-expanded="false">▱ <span>Layers</span></button>
+    </nav>
+    <section class="accuracy-card surface" aria-label="Accuracy summary" aria-live="polite">
+      <div class="accuracy-heading"><span class="eyebrow">ACCURACY</span><span id="accuracy-trip" class="accuracy-trip">Select a trip</span></div>
+      <strong id="metric-agreement">—</strong><span class="accuracy-definition">HMM weak-reference agreement</span><small id="metric-agreement-note">Run a trip to see its score</small>
+      <button class="score-details" data-drawer="results-drawer" aria-controls="results-drawer" aria-expanded="false">Score details ↗</button>
+    </section>
+    <div class="notifications"><div id="message" class="message surface" role="status" aria-live="polite" hidden></div><div id="progress" class="progress surface" role="status" aria-live="polite" hidden><span class="spinner" aria-hidden="true"></span><span>Matching GPS observations to the road network…</span></div></div>
+    <div class="map-caption surface"><span id="map-summary">No trip loaded · choose a trip in Trips</span><button id="fit-button" class="small-button" disabled>Fit route</button></div>
+  </main>
+  <dialog id="trips-drawer" class="drawer" aria-labelledby="trips-heading"><header class="drawer-heading"><h2 id="trips-heading">Trips & connection</h2><button class="close-drawer" aria-label="Close trips drawer">×</button></header><div class="drawer-body">      <div class="eyebrow">EVALUATOR WORKSPACE</div>
       <h1>Find the road<br>behind the GPS.</h1>
       <p class="intro">Select a trip. Reconstruct its route. Inspect the results.</p>
       <section class="side-card">
@@ -38,30 +50,23 @@
         <p id="evaluation-gate" class="gate" hidden>Final evaluation is disabled on this server. Trip IDs are available for inspection.</p>
       </section>
       <div class="pipeline-note"><span class="eyebrow">PREDICTION PIPELINE</span><p>Random Forest <span>→</span> HMM / Viterbi</p><small>Reference labels stay on the API server.</small></div>
-    </aside>
-    <main>
-      <div class="workspace-heading"><div><span class="eyebrow">ROUTE EXPLORER</span><h2 id="result-title">Ready for a trip.</h2><p id="result-subtitle">Connect to the API to begin.</p></div><span id="mode-pill" class="mode-pill" hidden></span></div>
-      <div id="message" class="message" role="status" aria-live="polite" hidden></div>
-      <div id="progress" class="progress" role="status" aria-live="polite" hidden><span class="spinner" aria-hidden="true"></span><span>Matching GPS observations to the road network…</span></div>
-      <section class="metric-grid" aria-label="Prediction summary">
-        <article class="metric"><span>GPS observations</span><strong id="metric-gps">—</strong><small id="metric-gps-note">Original observation count</small></article>
-        <article class="metric"><span>Weak-reference agreement</span><strong id="metric-agreement">—</strong><small id="metric-agreement-note">Not verified GPS accuracy</small></article>
-        <article class="metric"><span>Route parts</span><strong id="metric-parts">—</strong><small>Breaks remain separate</small></article>
-        <article class="metric"><span>Prediction runtime</span><strong id="metric-time">—</strong><small>Model + route reconstruction</small></article>
-      </section>
-      <section class="map-card" aria-label="Geographical route map">
-        <div class="map-toolbar"><div class="legend"><label><input id="layer-gps" type="checkbox" checked disabled><span class="dot gps"></span>GPS points</label><label><input id="layer-route" type="checkbox" checked disabled><span class="line route"></span>Predicted route</label></div><button id="fit-button" class="small-button" disabled>Fit route</button></div>
-        <div class="map-wrap"><div id="map" aria-label="GPS and reconstructed road route"></div><div id="map-empty" class="map-empty"><div class="empty-symbol" aria-hidden="true">⌁</div><strong>Your route will appear here</strong><p>Choose a trip and run reconstruction.</p></div></div>
-        <div class="map-footer"><span id="map-summary">Local vector layers · no external basemap loaded</span><label class="basemap-label"><input id="basemap-toggle" type="checkbox">Online street basemap (OpenStreetMap)</label></div>
-      </section>
-      <section id="evaluation-card" class="evaluation-card" hidden>
+<a id="api-docs" hidden target="_blank" rel="noopener">Open API documentation ↗</a></div></dialog>
+  <dialog id="results-drawer" class="drawer" aria-labelledby="results-heading"><header class="drawer-heading"><h2 id="results-heading">Results & diagnostics</h2><button class="close-drawer" aria-label="Close results drawer">×</button></header><div class="drawer-body">
+    <div class="workspace-heading"><span id="mode-pill" class="mode-pill" hidden></span><h2 id="result-title">Ready for a trip.</h2><p id="result-subtitle">Connect to the API to begin.</p></div>
+    <p class="score-explanation">The highlighted accuracy is agreement with automatically aligned reference roads. It is not verified physical GPS accuracy. Ambiguous observations are excluded; check coverage below.</p>
+    <section class="metric-grid" aria-label="Prediction summary"><article class="metric"><span>GPS observations</span><strong id="metric-gps">—</strong><small id="metric-gps-note">Original observation count</small></article><article class="metric"><span>Route parts</span><strong id="metric-parts">—</strong><small>Breaks remain separate</small></article><article class="metric"><span>Prediction runtime</span><strong id="metric-time">—</strong><small>Model + route reconstruction</small></article></section>      <section id="evaluation-card" class="evaluation-card" hidden>
         <div class="section-heading"><h3>Evaluation results</h3><span id="scoring-status" class="tag"></span></div>
         <p id="evaluation-note" class="helper"></p>
         <div class="detail-grid"><div><span>Classifier agreement</span><strong id="eval-classifier">—</strong></div><div><span>Reference coverage</span><strong id="eval-coverage">—</strong></div><div><span>Route edit similarity</span><strong id="eval-sequence">—</strong></div><div><span>Road overlap F1</span><strong id="eval-overlap">—</strong></div></div>
         <div class="result-actions"><details><summary>Request & diagnostics</summary><dl id="diagnostics"></dl></details><button id="download-button" class="small-button" disabled>Download result JSON</button></div>
       </section>
-      <footer class="page-footer">Real API inference. Explicit route breaks. No reference labels in this interface.</footer>
-    </main>
-  </div>
+</div></dialog>
+  <dialog id="layers-drawer" class="drawer" aria-labelledby="layers-heading"><header class="drawer-heading"><h2 id="layers-heading">Map layers</h2><button class="close-drawer" aria-label="Close layers drawer">×</button></header><div class="drawer-body">
+    <div class="eyebrow">OVERLAYS</div><div class="legend"><label><input id="layer-gps" type="checkbox" checked disabled><span class="dot gps"></span>GPS points</label><label><input id="layer-route" type="checkbox" checked disabled><span class="line route"></span>Predicted route</label></div>
+    <label for="basemap-select" class="field-label">Basemap</label><select id="basemap-select"><option value="none">Offline grid</option><option value="street">Street · OpenStreetMap</option><option value="satellite">Satellite · Esri World Imagery</option></select>
+    <p class="helper">Street and satellite views require internet and request the visible map area from the selected provider. GPS and route overlays work offline.</p><p id="basemap-status" class="helper" role="status" aria-live="polite">Offline grid · no external tiles</p>
+    <p class="helper">Imagery: Esri, Vantor/Maxar, Earthstar Geographics and the GIS User Community. <a href="https://doc.arcgis.com/en/data-appliance/2025/maps/world-imagery.htm" target="_blank" rel="noopener">Imagery information ↗</a></p>
+    <div class="pipeline-note"><span class="eyebrow">READING THE MAP</span><p>Blue dots are GPS readings. Purple lines are reconstructed roads. Separate route parts remain separate.</p></div>
+  </div></dialog>
 </body>
 </html>

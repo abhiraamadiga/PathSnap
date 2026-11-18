@@ -4,7 +4,7 @@ Map matching and route reconstruction from noisy vehicle GPS observations.
 
 ## Status
 
-Dataset validation, EDA, preprocessing, candidate generation, feature auditing and five-model experiments are implemented. Random Forest is selected as the untuned baseline using trip-grouped CV; a ten-trial TPE search and matched untuned/tuned development comparison are complete. Metrics measure weak-reference agreement, not verified GPS ground truth. HMM/Viterbi reconstruction and development comparisons are implemented. Inference-asset export and FastAPI serving with separate server-side aggregate scoring are implemented. The evaluator UI is implemented; physical two-laptop integration remains pending. Fitted model binaries are generated locally and are not tracked in Git.
+Dataset validation, EDA, preprocessing, candidate generation, feature auditing and five-model experiments are implemented. Random Forest is selected as the untuned baseline using trip-grouped CV; a ten-trial TPE search and matched untuned/tuned development comparison are complete. Metrics measure weak-reference agreement, not verified GPS ground truth. HMM/Viterbi reconstruction and development comparisons are implemented. Inference-asset export and FastAPI serving with separate server-side aggregate scoring are implemented. The evaluator UI has a full-screen map, highlighted weak-reference accuracy, drawers and optional satellite imagery. Local integration passes for all ten development trips; physical two-laptop testing is deferred. Fitted model binaries are generated locally and are not tracked in Git.
 
 ## Local setup
 
@@ -46,9 +46,9 @@ Use 80 training trips for fitting and group-aware cross-validation and 10 studen
 
 ## Planned two-laptop deployment
 
-Laptop 1 will host FastAPI, trained assets, road networks, HMM/Viterbi and isolated server-side scoring. Laptop 2 will run the UI, list ten evaluation trips and submit a selected trip ID over the network. It will display the returned route and metrics. Set its API URL to Laptop 1's reachable LAN address; `.env.example` documents proposed settings only.
+Laptop 1 will host FastAPI, trained assets, road networks, HMM/Viterbi and isolated server-side scoring. Laptop 2 will run the UI, list ten evaluation trips and submit a selected trip ID over the network. It will display the returned route and metrics. Set its API URL to Laptop 1's reachable LAN address; `.env.example` documents settings.
 
-API startup is documented in `docs/api.md` and UI startup in `docs/ui.md`; physical LAN integration remains pending. Demonstrate real requests for all ten trips and show receiving-laptop API logs.
+API startup is documented in `docs/api.md` and UI startup in `docs/ui.md`; [Step 12 deployment guide](docs/deployment.md) provides commands, a connectivity verifier and the pending physical LAN checklist. Demonstrate real requests for all ten trips and show receiving-laptop API logs.
 
 ## Submission
 
@@ -93,3 +93,7 @@ See [API setup, public contract, evaluation modes and logs](docs/api.md). Start 
 ## Evaluator UI (Step 11)
 
 See [UI setup, data boundaries and verification](docs/ui.md). Start Laptop 2 with `python -m pathsnap.ui --api-url http://LAPTOP1-LAN-IP:8000`, then open port 8501 in its browser. Trip lists, predictions and aggregate evaluation results come from the API; no model or dataset is loaded by the UI.
+
+## Integration and deployment (Step 12)
+
+See [local verification and two-laptop instructions](docs/deployment.md). All ten development trips reproduce 19,160 earlier predictions and aggregate scores. Browser/UI, asset and CORS checks pass locally. Physical two-laptop verification is deferred; final evaluator inference has not been run.

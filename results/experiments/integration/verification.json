@@ -1,0 +1,31 @@
+{
+  "step": 12,
+  "partition": "student_test",
+  "bundle_version": "v0.1.1",
+  "python_tests_passed": 54,
+  "javascript_tests_passed": 8,
+  "development_trips_verified": 10,
+  "observations_matched_step8": 19160,
+  "all_predictions_and_aggregate_scores_match": true,
+  "browser_checks": {
+    "full_viewport_map": true,
+    "prominent_accuracy_with_weak_reference_qualifier": true,
+    "trip_id_and_scored_denominator_and_coverage": true,
+    "trips_results_layers_drawers": true,
+    "escape_and_focus_return": true,
+    "run_closes_trip_drawer": true,
+    "loading_and_busy_feedback": true,
+    "trip_change_clears_score": true,
+    "gps_layer_toggle": true,
+    "satellite_tiles_loaded_at_world_view": true,
+    "offline_switch_removes_attribution": true,
+    "download_completed": false
+  },
+  "browser_download_note": "The download-event wait timed out; a completed file download was not verified. Existing export implementation remains available.",
+  "physical_two_laptop_test": "Deferred at user request; not performed",
+  "evaluator_inference_run": false,
+  "evaluator_payloads_read": false,
+  "receiving_api_log": "request-log.txt (actual local browser request excerpt)",
+  "connectivity_report": "connectivity.json",
+  "development_regression_report": "predictions.json"
+}

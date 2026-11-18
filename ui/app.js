@@ -21,14 +21,15 @@ function clearResult() {
   state.result = null; bounds = null;
   gpsLayer?.clearLayers(); routeLayer?.clearLayers();
   for (const id of ['metric-gps', 'metric-agreement', 'metric-parts', 'metric-time']) $(id).textContent = '—';
-  $('metric-agreement-note').textContent = 'Not verified GPS accuracy';
+  $('metric-agreement-note').textContent = 'Run a trip to see its score';
+  $('accuracy-trip').textContent = state.trips.length ? `Trip ${$('trip-select').value}` : 'Select a trip';
   $('metric-gps-note').textContent = 'Original observation count';
   $('evaluation-card').hidden = true; $('download-button').disabled = true;
   $('fit-button').disabled = true; $('layer-gps').disabled = true; $('layer-route').disabled = true;
   $('map-empty').hidden = false;
   $('map-empty').querySelector('strong').textContent = 'Your route will appear here';
-  $('map-empty').querySelector('p').textContent = 'Choose a trip and run reconstruction.';
-  $('map-summary').textContent = 'Local vector layers · no external basemap loaded';
+  $('map-empty').querySelector('p').textContent = 'Open Trips to choose a trip and run reconstruction.';
+  $('map-summary').textContent = 'No trip loaded · choose a trip in Trips';
   $('result-title').textContent = state.trips.length ? `Trip ${$('trip-select').value}` : 'Ready for a trip.';
   $('result-subtitle').textContent = state.trips.length ? 'Ready to reconstruct from the original GPS observations.' : 'Connect to the API to begin.';
 }
@@ -39,11 +40,23 @@ function initialiseMap() {
   $('layer-gps').addEventListener('change', () => $('layer-gps').checked ? gpsLayer.addTo(map) : map.removeLayer(gpsLayer));
   $('layer-route').addEventListener('change', () => $('layer-route').checked ? routeLayer.addTo(map) : map.removeLayer(routeLayer));
   $('fit-button').addEventListener('click', () => { if (bounds?.isValid()) map.fitBounds(bounds.pad(.08), { maxZoom: 18 }); });
-  $('basemap-toggle').addEventListener('change', () => {
-    if ($('basemap-toggle').checked) {
-      tiles ||= L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '© OpenStreetMap contributors', maxZoom: 19 });
-      tiles.addTo(map);
-    } else if (tiles) map.removeLayer(tiles);
+  $('basemap-select').addEventListener('change', () => {
+    if (tiles) { map.removeLayer(tiles); tiles.off(); tiles = null; }
+    const mode = $('basemap-select').value;
+    if (mode === 'none') { $('basemap-status').textContent = 'Offline grid · no external tiles'; return; }
+    const satellite = mode === 'satellite';
+    const label = satellite ? 'Esri World Imagery' : 'OpenStreetMap';
+    let failed = false;
+    tiles = L.tileLayer(satellite
+      ? 'https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'
+      : 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: satellite ? 'Imagery © Esri, Vantor/Maxar, Earthstar Geographics, GIS User Community' : '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+      maxNativeZoom: 19, maxZoom: 19,
+    });
+    $('basemap-status').textContent = `Loading ${label}…`;
+    tiles.on('tileerror', () => { failed = true; $('basemap-status').textContent = `${label}: some tiles could not load. Check internet or use the offline grid.`; });
+    tiles.on('load', () => { if (!failed) $('basemap-status').textContent = `${label} · online`; });
+    tiles.addTo(map);
   });
 }
 function tooltip(text) { const element = document.createElement('span'); element.textContent = text; return element; }
@@ -73,11 +86,12 @@ function drawMap(body) {
 function render(body) {
   state.result = body; const prediction = body.prediction, evaluation = body.evaluation;
   $('result-title').textContent = `Trip ${body.trip_id}`;
+  $('accuracy-trip').textContent = `Trip ${body.trip_id}`;
   $('result-subtitle').textContent = `Reconstructed with ${prediction.bundle_version} · ${body.partition === 'student_test' ? 'Student-test development trip' : 'Final evaluator trip'}`;
   $('metric-gps').textContent = prediction.observations.length.toLocaleString();
   $('metric-gps-note').textContent = `${prediction.diagnostics.invalid_observations || 0} invalid observations retained`;
   $('metric-agreement').textContent = percent(evaluation.hmm_weak_reference_top1);
-  $('metric-agreement-note').textContent = evaluation.status === 'ok' ? `Across ${(evaluation.evaluated_observations || 0).toLocaleString()} scored observations` : 'Reference scoring unavailable';
+  $('metric-agreement-note').textContent = evaluation.status === 'ok' ? `${(evaluation.evaluated_observations || 0).toLocaleString()} scored / ${evaluation.total_observations.toLocaleString()} GPS · ${percent(evaluation.reference_coverage)} coverage` : 'Reference scoring unavailable';
   $('metric-parts').textContent = prediction.route_parts.length.toLocaleString();
   $('metric-time').textContent = `${prediction.prediction_seconds.toFixed(2)} s`;
   $('scoring-status').textContent = { ok: 'Aggregate scoring', disabled: 'Scoring disabled', reference_unavailable: 'No reference available', invalid_reference: 'Reference could not be scored' }[evaluation.status] || 'Scoring unavailable';
@@ -125,6 +139,7 @@ async function connect(event) {
 }
 async function run() {
   if (!state.enabled || state.predicting || !state.trips.includes($('trip-select').value)) return;
+  $('trips-drawer').close();
   const tripId = $('trip-select').value; state.predicting = true; state.controller = new AbortController(); clearResult(); message(''); controls();
   try {
     const body = await requestJSON(state.api, '/predict', { method: 'POST', body: { trip_id: tripId }, signal: state.controller.signal, timeoutMs: 180000 });
@@ -141,6 +156,24 @@ $('download-button').addEventListener('click', () => {
   const url = URL.createObjectURL(new Blob([JSON.stringify(state.result, null, 2)], { type: 'application/json' }));
   const anchor = document.createElement('a'); anchor.href = url; anchor.download = `pathsnap-trip-${state.result.trip_id}.json`; anchor.click(); setTimeout(() => URL.revokeObjectURL(url), 1000);
 });
+for (const trigger of document.querySelectorAll('[data-drawer]')) {
+  trigger.addEventListener('click', () => {
+    const drawer = $(trigger.dataset.drawer);
+    for (const other of document.querySelectorAll('dialog[open]')) other.close();
+    drawer.showModal();
+    for (const button of document.querySelectorAll('[data-drawer]')) button.setAttribute('aria-expanded', String(button.dataset.drawer === drawer.id));
+  });
+}
+for (const drawer of document.querySelectorAll('dialog.drawer')) {
+  drawer.querySelector('.close-drawer').addEventListener('click', () => drawer.close());
+  drawer.addEventListener('close', () => {
+    for (const button of document.querySelectorAll('[data-drawer]')) button.setAttribute('aria-expanded', 'false');
+  });
+  drawer.addEventListener('click', event => {
+    const rect = drawer.getBoundingClientRect();
+    if (event.target === drawer && (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom)) drawer.close();
+  });
+}
 initialiseMap();
 try {
   const config = await fetch('/config.json', { cache: 'no-store' }).then(response => { if (!response.ok) throw new Error('UI configuration unavailable'); return response.json(); });
