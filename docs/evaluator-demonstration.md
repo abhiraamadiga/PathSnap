@@ -4,7 +4,7 @@ The demo uses the ten trips from the supplied `evaluator_test.zip`, verified aga
 
 ## Local demo
 
-Extract the v0.1.3 release into `artifacts/releases/` on the API laptop and install the pinned requirements as described in `docs/api.md`. Run the following commands from the repository root in separate terminals.
+Download the [v0.1.3 inference bundle](https://github.com/abhiraamadiga/PathSnap/releases/tag/v0.1.3) and extract it into `artifacts/releases/` on the API laptop and install the pinned requirements as described in `docs/api.md`. Run the following commands from the repository root in separate terminals.
 
 Terminal 1 serves the evaluator archive:
 

@@ -4,7 +4,7 @@ Map matching and route reconstruction from noisy vehicle GPS observations.
 
 ## Status
 
-Dataset validation, EDA, preprocessing, candidate generation, feature auditing and five-model experiments are implemented. Random Forest is selected as the untuned baseline using trip-grouped CV; a ten-trial TPE search and matched untuned/tuned development comparison are complete. Metrics measure weak-reference agreement, not verified GPS ground truth. HMM/Viterbi reconstruction and development comparisons are implemented. Inference-asset export and FastAPI serving with separate server-side aggregate scoring are implemented. The evaluator UI has a full-screen map, highlighted weak-reference accuracy, drawers and optional satellite imagery. Local integration passes for all ten development trips; physical two-laptop testing is deferred. Fitted model binaries are generated locally and are not tracked in Git.
+Dataset validation, EDA, preprocessing, candidate generation, feature auditing and five-model experiments are implemented. Random Forest is selected as the untuned baseline using trip-grouped CV; a ten-trial TPE search and matched untuned/tuned development comparison are complete. Metrics measure weak-reference agreement, not verified GPS ground truth. HMM/Viterbi reconstruction and development comparisons are implemented. Inference-asset export and FastAPI serving with separate server-side aggregate scoring are implemented. The evaluator UI has a full-screen map, highlighted weak-reference accuracy, drawers and optional satellite imagery. Local integration passed for all ten development trips. The evaluator release scored all ten reserved trips, and the two-laptop rehearsal recorded successful LAN predictions for trips 00000017 and 00000023.
 
 ## Local setup
 
@@ -52,7 +52,7 @@ API startup is documented in `docs/api.md` and UI startup in `docs/ui.md`; [Step
 
 ## Submission
 
-Deliver a public GitHub repository and one consolidated PDF report. Commit all implementation code and genuine experimental evidence. Generated model binaries are ignored during development; explicitly arrange their versioned delivery subject to repository size limits before submission. Do not commit secrets or evaluator ground truth. Every team member must understand and explain the work.
+Deliver a public GitHub repository and one consolidated PDF report. Commit all implementation code and genuine experimental evidence. The versioned model weights and runtime configuration are available under GitHub Releases. Do not commit secrets or evaluator ground truth. Every team member must understand and explain the work.
 
 ## Dataset validation
 
@@ -82,7 +82,11 @@ The reserved evaluator ZIP is available for final evaluation only; see [data-iso
 
 See [decoder method and reproduction](docs/hmm-viterbi.md) and [measured results including failures](docs/hmm-results.md). The selected runtime settings are in `configs/hmm.json`. Evaluator data remains excluded; the ten committed route maps show development trips only.
 
-## Inference bundle (Step 9)
+## Inference bundle
+
+Download [PathSnap inference bundle v0.1.3](https://github.com/abhiraamadiga/PathSnap/releases/tag/v0.1.3) and extract it into `artifacts/releases/` on the API laptop. The ZIP includes the trained Random Forest, HMM and preprocessing settings, a manifest, and pinned runtime dependencies. Use the handout datasets locally for inference and evaluation.
+
+Archive SHA-256: `41fe868104acda8658bef508618d00691a77a2646ce69468d4e1100ba6416a96`.
 
 See [export, standalone prediction and verification](docs/inference-export.md). Export a versioned model/config/runtime ZIP with `python -m pathsnap.inference.export --version v0.1.2` after installing `.[inference,export]`. The verified release contains no datasets or reference labels; the supplied bundle requires Python 3.14 and its pinned dependencies.
 
@@ -96,7 +100,7 @@ See [UI setup, data boundaries and verification](docs/ui.md). Start Laptop 2 wit
 
 ## Integration and deployment (Step 12)
 
-See [local verification and two-laptop instructions](docs/deployment.md). All ten development trips reproduce 19,160 earlier predictions and aggregate scores. Browser/UI, asset and CORS checks pass locally. Physical two-laptop verification is deferred; final evaluator inference has not been run.
+See [local verification and two-laptop instructions](docs/deployment.md). All ten development trips reproduce 19,160 earlier predictions and aggregate scores. Browser/UI, asset and CORS checks pass locally. See the evaluator demonstration guide below for the final release, evaluator results, and two-laptop setup.
 
 The [decoder refinement](docs/hmm-results.md#decoder-refinement-v012) raises pooled development weak-reference agreement to 92.42%. The API defaults to inference bundle v0.1.2.
 
