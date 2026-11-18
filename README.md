@@ -84,4 +84,4 @@ See [decoder method and reproduction](docs/hmm-viterbi.md) and [measured results
 
 ## Inference bundle (Step 9)
 
-See [export, standalone prediction and verification](docs/inference-export.md). Export a versioned model/config/runtime ZIP with `python -m pathsnap.inference.export --version v0.1.0` after installing `.[inference,export]`. The verified release contains no datasets or reference labels; the supplied bundle requires Python 3.14 and its pinned dependencies.
+See [export, standalone prediction and verification](docs/inference-export.md). Export a versioned model/config/runtime ZIP with `python -m pathsnap.inference.export --version v0.1.1` after installing `.[inference,export]`. The verified release contains no datasets or reference labels; the supplied bundle requires Python 3.14 and its pinned dependencies.

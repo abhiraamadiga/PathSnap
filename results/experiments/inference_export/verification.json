@@ -1,5 +1,5 @@
 {
-  "archive_sha256": "9e4bdc0bd42ff16a8b10974078a2555039f4de6e6463bad694bd3d255648215c",
+  "archive_sha256": "c4e3abf29d42b476d9159e44a0584c73a3d441d92effd7e6edea577f37e78ce3",
   "verification_mode": "isolated Python subprocess per trip; no original repository imports",
   "raw_input_types": [
     "track",
@@ -13,70 +13,70 @@
       "observations": 2503,
       "predictions_match_step8": true,
       "route_parts_match_step8": true,
-      "prediction_seconds": 2.5871141759998864
+      "prediction_seconds": 2.499409004998597
     },
     {
       "trip_id": "00000007",
       "observations": 1354,
       "predictions_match_step8": true,
       "route_parts_match_step8": true,
-      "prediction_seconds": 1.2657232920028036
+      "prediction_seconds": 1.2490170620003482
     },
     {
       "trip_id": "00000009",
       "observations": 1049,
       "predictions_match_step8": true,
       "route_parts_match_step8": true,
-      "prediction_seconds": 1.7062185579998186
+      "prediction_seconds": 1.7302074960025493
     },
     {
       "trip_id": "00000040",
       "observations": 2995,
       "predictions_match_step8": true,
       "route_parts_match_step8": true,
-      "prediction_seconds": 3.4903089389990782
+      "prediction_seconds": 3.1938774039990676
     },
     {
       "trip_id": "00000052",
       "observations": 262,
       "predictions_match_step8": true,
       "route_parts_match_step8": true,
-      "prediction_seconds": 0.45498577499893145
+      "prediction_seconds": 0.4441299550016993
     },
     {
       "trip_id": "00000056",
       "observations": 3958,
       "predictions_match_step8": true,
       "route_parts_match_step8": true,
-      "prediction_seconds": 7.027679309998348
+      "prediction_seconds": 7.029542906999268
     },
     {
       "trip_id": "00000065",
       "observations": 768,
       "predictions_match_step8": true,
       "route_parts_match_step8": true,
-      "prediction_seconds": 1.5318639770011941
+      "prediction_seconds": 1.4305896789992403
     },
     {
       "trip_id": "00000076",
       "observations": 1486,
       "predictions_match_step8": true,
       "route_parts_match_step8": true,
-      "prediction_seconds": 4.940775045997725
+      "prediction_seconds": 4.368809909999982
     },
     {
       "trip_id": "00000077",
       "observations": 3911,
       "predictions_match_step8": true,
       "route_parts_match_step8": true,
-      "prediction_seconds": 4.425077683001291
+      "prediction_seconds": 4.351188523000019
     },
     {
       "trip_id": "00000091",
       "observations": 874,
       "predictions_match_step8": true,
       "route_parts_match_step8": true,
-      "prediction_seconds": 1.4517282630004047
+      "prediction_seconds": 1.42045167499964
     }
   ],
   "total_observations": 19160,

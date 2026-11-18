@@ -2,7 +2,7 @@
 
 ## What is exported
 
-`pathsnap-v0.1.0.zip` contains a standalone runtime directory with:
+`pathsnap-v0.1.1.zip` contains a standalone runtime directory with:
 
 - The selected Step 7 Random Forest weights (`model.joblib`), with exact parameters and feature order.
 - Frozen candidate-generation settings and selected Step 8 HMM settings. Development-trip IDs, search grids and scores are stripped from runtime configs.
@@ -20,7 +20,7 @@ With the trained Step 7 artifact available locally:
 
 ```bash
 python -m pip install -e '.[inference,export]'
-python -m pathsnap.inference.export --version v0.1.0
+python -m pathsnap.inference.export --version v0.1.1
 ```
 
 Outputs are an ignored directory and ZIP under `artifacts/releases/`. The exporter refuses to overwrite an existing version; use a new tag for changed code/configurations. It stages and verifies the contents before publishing the local release. This is local artifact creation, not a GitHub release or deployment.
@@ -32,7 +32,7 @@ Outputs are an ignored directory and ZIP under `artifacts/releases/`. The export
 The supplied artifact was built and tested with Python **3.14.4** on Linux. Its loader requires Python **3.14** and the exact recorded package versions. Use a Python 3.14 environment on the model-hosting laptop:
 
 ```bash
-cd /path/to/extracted/pathsnap-v0.1.0
+cd /path/to/extracted/pathsnap-v0.1.1
 python -m venv .venv
 source .venv/bin/activate
 python -m pip install -r requirements.txt
@@ -49,7 +49,7 @@ Only load trusted bundles: joblib/pickle deserialization can execute code. Manif
 
 ```python
 from pathsnap.inference.bundle import load_bundle
-predictor = load_bundle('/path/to/pathsnap-v0.1.0')
+predictor = load_bundle('/path/to/pathsnap-v0.1.1')
 result = predictor.predict(track, nodes, arcs)
 ```
 
@@ -66,7 +66,7 @@ The predictor does not output accuracy, weak labels or reference routes. Later A
 ```bash
 python -m unittest discover -s tests -v
 python scripts/verify_inference_bundle.py \
-  --bundle-zip artifacts/releases/pathsnap-v0.1.0.zip \
+  --bundle-zip artifacts/releases/pathsnap-v0.1.1.zip \
   --source '../Provided_Material/Student folder.zip'
 ```
 

@@ -46,5 +46,3 @@ def prepare(track, nodes, arcs, config):
         records.append({'observation_id':row_id,'status':'ok' if candidates else 'no_candidates','candidates':candidates})
         previous = (point,raw[2])
     return index,records
-
-

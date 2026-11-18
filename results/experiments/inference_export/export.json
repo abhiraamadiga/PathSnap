@@ -1,9 +1,9 @@
 {
-  "bundle_version": "v0.1.0",
-  "bundle_directory": "artifacts/releases/pathsnap-v0.1.0",
-  "archive": "artifacts/releases/pathsnap-v0.1.0.zip",
+  "bundle_version": "v0.1.1",
+  "bundle_directory": "artifacts/releases/pathsnap-v0.1.1",
+  "archive": "artifacts/releases/pathsnap-v0.1.1.zip",
   "archive_bytes": 2644076,
-  "archive_sha256": "9e4bdc0bd42ff16a8b10974078a2555039f4de6e6463bad694bd3d255648215c",
+  "archive_sha256": "c4e3abf29d42b476d9159e44a0584c73a3d441d92effd7e6edea577f37e78ce3",
   "model_sha256": "184aac35a35367198f920be784c98a31d40b789dc036345bac3651122a6e2378",
   "runtime_versions": {
     "certifi": "2026.10.23",
@@ -18,5 +18,5 @@
   },
   "python_version": "3.14.4",
   "reference_data_included": false,
-  "base_git_revision": "f95e13da4a6e078d0c5d41185043e62f2f457eca"
+  "base_git_revision": "59c51eb87f8bed47e1824a2c45a54bfb45e77b3f"
 }
