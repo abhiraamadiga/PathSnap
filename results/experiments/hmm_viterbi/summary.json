@@ -1,0 +1,74 @@
+{
+  "selection": {
+    "classifier_only": {
+      "trips": 5,
+      "weak_reference_top1": 0.9249471458773785,
+      "mean_trip_weak_reference_top1": 0.9291739282662824,
+      "direct_continuity": 0.9398136798234862,
+      "mean_reference_sequence_edit_similarity": 0.48391937975223415,
+      "mean_reference_arc_set_f1": 0.8231200297569874,
+      "total_route_parts": 291,
+      "accepted_weak_labels": 6622,
+      "decoder_unreachable_resets": 0
+    },
+    "hmm_viterbi": {
+      "trips": 5,
+      "weak_reference_top1": 0.9411054062216853,
+      "mean_trip_weak_reference_top1": 0.939169631199567,
+      "direct_continuity": 0.9765873988722726,
+      "mean_reference_sequence_edit_similarity": 0.8202774938826052,
+      "mean_reference_arc_set_f1": 0.9270109160692602,
+      "total_route_parts": 8,
+      "accepted_weak_labels": 6622,
+      "decoder_unreachable_resets": 3
+    }
+  },
+  "review": {
+    "classifier_only": {
+      "trips": 5,
+      "weak_reference_top1": 0.8457446808510638,
+      "mean_trip_weak_reference_top1": 0.8727784376046148,
+      "direct_continuity": 0.8635247020289327,
+      "mean_reference_sequence_edit_similarity": 0.32265650729172146,
+      "mean_reference_arc_set_f1": 0.7319596037785592,
+      "total_route_parts": 688,
+      "accepted_weak_labels": 5640,
+      "decoder_unreachable_resets": 0
+    },
+    "hmm_viterbi": {
+      "trips": 5,
+      "weak_reference_top1": 0.8886524822695036,
+      "mean_trip_weak_reference_top1": 0.920254792427259,
+      "direct_continuity": 0.9551451187335093,
+      "mean_reference_sequence_edit_similarity": 0.6754262773831311,
+      "mean_reference_arc_set_f1": 0.878989269731535,
+      "total_route_parts": 10,
+      "accepted_weak_labels": 5640,
+      "decoder_unreachable_resets": 4
+    }
+  },
+  "all": {
+    "classifier_only": {
+      "trips": 10,
+      "weak_reference_top1": 0.888517370738868,
+      "mean_trip_weak_reference_top1": 0.9009761829354488,
+      "direct_continuity": 0.8960259021358817,
+      "mean_reference_sequence_edit_similarity": 0.4032879435219778,
+      "mean_reference_arc_set_f1": 0.7775398167677734,
+      "total_route_parts": 979,
+      "accepted_weak_labels": 12262,
+      "decoder_unreachable_resets": 0
+    },
+    "hmm_viterbi": {
+      "trips": 10,
+      "weak_reference_top1": 0.9169792855977817,
+      "mean_trip_weak_reference_top1": 0.929712211813413,
+      "direct_continuity": 0.9642801190662698,
+      "mean_reference_sequence_edit_similarity": 0.7478518856328681,
+      "mean_reference_arc_set_f1": 0.9030000929003977,
+      "total_route_parts": 18,
+      "accepted_weak_labels": 12262,
+      "decoder_unreachable_resets": 7
+    }
+  }
+}
