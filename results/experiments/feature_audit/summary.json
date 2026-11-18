@@ -1,0 +1,40 @@
+{
+  "feature_columns": [
+    "distance_m",
+    "projection_fraction",
+    "arc_length_m",
+    "heading_difference_rad",
+    "heading_available",
+    "speed_m_s",
+    "dt_s",
+    "previous_distance_m",
+    "candidate_rank",
+    "gap_reset"
+  ],
+  "labels": "weak geometric reference labels, not verified GPS truth",
+  "partitions": {
+    "train": {
+      "trips": 80,
+      "observations": 208417,
+      "candidate_rows": 1241685,
+      "no_candidates": 13608,
+      "accepted_weak_labels": 128237,
+      "usable_observations": 126824,
+      "weak_label_candidate_misses": 1413,
+      "invalid_feature_values": 0
+    },
+    "student_test": {
+      "trips": 10,
+      "observations": 19160,
+      "candidate_rows": 125519,
+      "no_candidates": 0,
+      "accepted_weak_labels": 12262,
+      "usable_observations": 12256,
+      "weak_label_candidate_misses": 6,
+      "invalid_feature_values": 0
+    }
+  },
+  "no_usable_label_trips": [
+    "train/00000011"
+  ]
+}

@@ -61,3 +61,7 @@ See [dataset understanding](docs/dataset-understanding.md) for file relationship
 ## Exploratory analysis
 
 See [EDA findings and reproduction commands](docs/eda-findings.md) for partition summaries, data-quality diagnostics, figures and interactive maps. Install the `eda` extra to reproduce this stage.
+
+## Phase 1 review
+
+Install `pip install -e ".[eda,features]"` for preprocessing and EDA dependencies. See [phase-one review](docs/phase1-review.md) for feature auditing, coverage diagnostics, maps and the demonstration checklist.
