@@ -4,7 +4,7 @@ Map matching and route reconstruction from noisy vehicle GPS observations.
 
 ## Status
 
-Initial scaffold only. Data processing, models, decoding, API and UI are not implemented. No experimental results or trained artifacts are included.
+Dataset loading and structural validation are implemented, with an inventory of all 90 provided development trips. Model training, feature engineering, decoding, API and UI remain pending. No trained artifacts or model performance claims are included.
 
 ## Local setup
 
@@ -53,3 +53,7 @@ No run commands or endpoints exist yet. Add exact startup commands and network s
 ## Submission
 
 Deliver a public GitHub repository and one consolidated PDF report. Commit all implementation code and genuine experimental evidence. Generated model binaries are ignored during development; explicitly arrange their versioned delivery subject to repository size limits before submission. Do not commit secrets or evaluator ground truth. Every team member must understand and explain the work.
+
+## Dataset validation
+
+See [dataset understanding](docs/dataset-understanding.md) for file relationships, reproduction commands, validation results and limitations. The loader supports the supplied ZIP and extracted directories without third-party dependencies.
