@@ -1,0 +1,66 @@
+{
+  "selected_model": "random_forest",
+  "runner_up": "hist_gradient_boosting",
+  "criterion": "highest mean trip-grouped CV candidate Macro F1",
+  "cv_macro_f1_margin": 0.0012125897324622992,
+  "paired_cv_folds": [
+    {
+      "fold": 0,
+      "random_forest_macro_f1": 0.8696858399287917,
+      "hist_gradient_boosting_macro_f1": 0.8701847883533746,
+      "difference": -0.0004989484245829789
+    },
+    {
+      "fold": 1,
+      "random_forest_macro_f1": 0.8783923277706268,
+      "hist_gradient_boosting_macro_f1": 0.8748145891704959,
+      "difference": 0.0035777386001308864
+    },
+    {
+      "fold": 2,
+      "random_forest_macro_f1": 0.9364702079599596,
+      "hist_gradient_boosting_macro_f1": 0.93591122893812,
+      "difference": 0.0005589790218396562
+    }
+  ],
+  "random_forest_to_boosting_final_fit_time_ratio": 17.107341057091528,
+  "equal_trip_student_top1": [
+    {
+      "model": "logistic_regression",
+      "equal_trip_mean_weak_reference_top1": 0.8872073677881432
+    },
+    {
+      "model": "gaussian_nb",
+      "equal_trip_mean_weak_reference_top1": 0.8930212772332793
+    },
+    {
+      "model": "decision_tree",
+      "equal_trip_mean_weak_reference_top1": 0.8910524532623048
+    },
+    {
+      "model": "random_forest",
+      "equal_trip_mean_weak_reference_top1": 0.9039627033632882
+    },
+    {
+      "model": "hist_gradient_boosting",
+      "equal_trip_mean_weak_reference_top1": 0.9025223466601426
+    }
+  ],
+  "evidence_sha256": {
+    "results/experiments/model_comparison/comparison.csv": "d517cf0a448542e0697f5251c84346650039baad92a227ae1218887c28c622a6",
+    "results/experiments/model_comparison/cv_results.csv": "6b0ca96f04088b3f1cd09b7e91b24177b925c575a1bf70570ad7c8a1f6571c9c",
+    "results/experiments/model_comparison/manifest.json": "6480dbae55c551dbb7a971c0f675a7dee0dacdbb322e8bdb998ec194a177278a",
+    "configs/model_experiments.json": "cebee30baf1d2fafc20e74cad130d68dc47f9385acc7b516b145aabd40ca4c71",
+    "results/experiments/model_comparison/decision_tree_per_trip.csv": "7d91ef876db1790d06e2ade513374689b4fbd2c223ca1d3dfbc1104a4b51524f",
+    "results/experiments/model_comparison/gaussian_nb_per_trip.csv": "12af86ad90a987f90c30def94a755b1adb268d2ea775d26a6295fb801eddfe61",
+    "results/experiments/model_comparison/hist_gradient_boosting_per_trip.csv": "fb1736d18e98d36aa069d60afc83570be492b4ad2d793316bb9bb63c3cf7af68",
+    "results/experiments/model_comparison/logistic_regression_per_trip.csv": "f0878ad5614cbe039a0f07fb4b4896acb406c6a4d613a13e465b3d69c44e641f",
+    "results/experiments/model_comparison/random_forest_per_trip.csv": "2c7e6a7cefaacad9623f6e199970bba287d8c381c6a10bfad80661706ec9cabc"
+  },
+  "selection_uses_student_test_scores": false,
+  "scope": "baseline selection for Bayesian tuning; weak geometric labels, not verified observation ground truth",
+  "local_artifact_bytes": {
+    "random_forest": 31616825,
+    "hist_gradient_boosting": 196304
+  }
+}

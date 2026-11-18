@@ -4,7 +4,7 @@ Map matching and route reconstruction from noisy vehicle GPS observations.
 
 ## Status
 
-Dataset loading and structural validation are implemented, with an inventory of all 90 provided development trips. EDA statistics, plots and two interactive Folium maps are also available. Model training, feature engineering, decoding, API and UI remain pending. No trained artifacts or model performance claims are included.
+Dataset validation, EDA, preprocessing, candidate generation, feature auditing and five-model experiments are implemented. Random Forest is selected as the untuned baseline using trip-grouped CV. Metrics measure weak-reference agreement, not verified GPS ground truth. Bayesian tuning, HMM/Viterbi, API and UI remain pending. Fitted model binaries are generated locally and are not tracked in Git.
 
 ## Local setup
 
@@ -13,10 +13,10 @@ Requires Python 3.11 or newer. From the repository root:
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
-python -m pip install -e .
+python -m pip install -e ".[eda,features,models]"
 ```
 
-The package currently has no runtime dependencies. Add dependencies as components are implemented. The original material remains in the sibling `Provided_Material` folder; datasets are not committed.
+Component dependencies are provided through the `eda`, `features` and `models` optional extras. The original material remains in the sibling `Provided_Material` folder; datasets are not committed.
 
 ## Structure
 
@@ -48,7 +48,7 @@ Use 80 training trips for fitting and group-aware cross-validation and 10 studen
 
 Laptop 1 will host FastAPI, trained assets, road networks, HMM/Viterbi and isolated server-side scoring. Laptop 2 will run the UI, list ten evaluation trips and submit a selected trip ID over the network. It will display the returned route and metrics. Set its API URL to Laptop 1's reachable LAN address; `.env.example` documents proposed settings only.
 
-No run commands or endpoints exist yet. Add exact startup commands and network setup when implemented. Demonstrate real requests for all ten trips and show receiving-laptop API logs.
+API/UI startup commands, endpoints and network setup will be documented when implemented. Demonstrate real requests for all ten trips and show receiving-laptop API logs.
 
 ## Submission
 
@@ -69,3 +69,7 @@ Install `pip install -e ".[eda,features]"` for preprocessing and EDA dependencie
 ## Model experiments
 
 See [five-model experiment design](docs/model-experiments.md) and [measured results](docs/model-results.md). Install the `models` extra along with `eda,features`. All classification results measure weak geometric reference labels and require the limitations described in the report.
+
+## Model selection (Step 6)
+
+See [selection decision and tradeoffs](docs/model-selection.md). The selected untuned configuration is `configs/selected_model.json`; the numerical review and evidence hashes are in `results/experiments/model_selection/review.json`. Bayesian tuning is the next stage.
