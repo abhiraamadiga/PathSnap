@@ -11,6 +11,7 @@ requires-python = ">=3.11"
 dependencies = []
 
 [project.optional-dependencies]
+optimization = ["optuna>=4,<5"]
 models = ["scikit-learn>=1.5,<2", "joblib>=1.4,<2", "threadpoolctl>=3,<4"]
 features = ["numpy>=1.26,<3", "scipy>=1.13,<2", "pyproj>=3.6,<4"]
 eda = ["numpy>=1.26,<3", "matplotlib>=3.9,<4", "folium>=0.16,<1"]

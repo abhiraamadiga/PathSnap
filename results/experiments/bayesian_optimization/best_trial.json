@@ -1,0 +1,13 @@
+{
+  "model": "random_forest",
+  "trial": 4,
+  "parameters": {
+    "n_estimators": 80,
+    "max_depth": 10,
+    "min_samples_leaf": 5,
+    "max_features": "sqrt"
+  },
+  "cv_macro_f1": 0.8953353024894835,
+  "cv_macro_f1_std": 0.02922755452806648,
+  "selection_data": "training trip-grouped CV only"
+}

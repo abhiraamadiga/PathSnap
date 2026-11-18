@@ -4,7 +4,7 @@ Map matching and route reconstruction from noisy vehicle GPS observations.
 
 ## Status
 
-Dataset validation, EDA, preprocessing, candidate generation, feature auditing and five-model experiments are implemented. Random Forest is selected as the untuned baseline using trip-grouped CV. Metrics measure weak-reference agreement, not verified GPS ground truth. Bayesian tuning, HMM/Viterbi, API and UI remain pending. Fitted model binaries are generated locally and are not tracked in Git.
+Dataset validation, EDA, preprocessing, candidate generation, feature auditing and five-model experiments are implemented. Random Forest is selected as the untuned baseline using trip-grouped CV; a ten-trial TPE search and matched untuned/tuned development comparison are complete. Metrics measure weak-reference agreement, not verified GPS ground truth. HMM/Viterbi, API and UI remain pending. Fitted model binaries are generated locally and are not tracked in Git.
 
 ## Local setup
 
@@ -72,4 +72,8 @@ See [five-model experiment design](docs/model-experiments.md) and [measured resu
 
 ## Model selection (Step 6)
 
-See [selection decision and tradeoffs](docs/model-selection.md). The selected untuned configuration is `configs/selected_model.json`; the numerical review and evidence hashes are in `results/experiments/model_selection/review.json`. Bayesian tuning is the next stage.
+See [selection decision and tradeoffs](docs/model-selection.md). The selected untuned configuration is `configs/selected_model.json`; the numerical review and evidence hashes are in `results/experiments/model_selection/review.json`. This untuned baseline is preserved for the Step 7 comparison.
+
+## Evaluator archive and Bayesian tuning
+
+The reserved evaluator ZIP is available for final evaluation only; see [data-isolation plan](docs/evaluator-data-plan.md). Step 7 uses training-trip CV and freezes parameters before student-test evaluation. Install the `optimization` extra and follow [Bayesian optimisation](docs/bayesian-optimization.md); measured results are in [Bayesian results](docs/bayesian-results.md).
