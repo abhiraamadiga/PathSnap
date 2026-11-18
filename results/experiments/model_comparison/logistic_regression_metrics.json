@@ -1,0 +1,32 @@
+{
+  "model": "logistic_regression",
+  "family": "linear",
+  "configuration": {
+    "C": 1.0,
+    "max_iter": 1000
+  },
+  "classification": {
+    "accuracy": 0.9501063036695474,
+    "macro_precision": 0.9130194014417742,
+    "macro_recall": 0.9086032246524172,
+    "macro_f1": 0.9107910965848608,
+    "log_loss": 0.14314264405238125,
+    "confusion_matrix": [
+      [
+        58453,
+        1725
+      ],
+      [
+        1889,
+        10367
+      ]
+    ]
+  },
+  "sequence": {
+    "weak_reference_top1": 0.8775077475126407,
+    "accepted_reference_observations": 12262,
+    "directly_continuous_pairs": 17064,
+    "eligible_consecutive_pairs": 19149,
+    "direct_route_continuity": 0.8911170296099012
+  }
+}

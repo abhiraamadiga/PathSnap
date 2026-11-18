@@ -1,0 +1,33 @@
+{
+  "model": "random_forest",
+  "family": "ensemble",
+  "configuration": {
+    "n_estimators": 80,
+    "max_depth": 14,
+    "min_samples_leaf": 5
+  },
+  "classification": {
+    "accuracy": 0.9594113261727918,
+    "macro_precision": 0.9273784857727717,
+    "macro_recall": 0.9284328730879071,
+    "macro_f1": 0.9279045762944085,
+    "log_loss": 0.0997916303193846,
+    "confusion_matrix": [
+      [
+        58689,
+        1489
+      ],
+      [
+        1451,
+        10805
+      ]
+    ]
+  },
+  "sequence": {
+    "weak_reference_top1": 0.8908008481487523,
+    "accepted_reference_observations": 12262,
+    "directly_continuous_pairs": 17126,
+    "eligible_consecutive_pairs": 19149,
+    "direct_route_continuity": 0.8943547965951225
+  }
+}
