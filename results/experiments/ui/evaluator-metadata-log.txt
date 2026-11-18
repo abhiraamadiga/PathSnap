@@ -1,0 +1,12 @@
+2026-11-18 15:31:01,626 INFO service_ready partition=evaluator_test bundle=v0.1.1 trips=10 inference_enabled=False
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:8001 (Press CTRL+C to quit)
+2026-11-18 15:31:16,145 INFO request request_id=feabd5f2-d067-4aa4-8e3f-e2635b3313b0 method=GET path=/readyz status=200 duration_ms=1.12
+INFO:     127.0.0.1:53190 - "GET /readyz HTTP/1.1" 200 OK
+2026-11-18 15:31:16,153 INFO request request_id=38fe370b-8434-4869-b988-0b5c5a2b8233 method=GET path=/trips status=200 duration_ms=0.88
+INFO:     127.0.0.1:53190 - "GET /trips HTTP/1.1" 200 OK
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+2026-11-18 15:41:14,557 INFO service_stopped
+INFO:     Application shutdown complete.
+INFO:     Finished server process [62676]

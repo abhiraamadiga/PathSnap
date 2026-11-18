@@ -1,0 +1,2 @@
+# Preserve verified upstream dependency bytes, including original line endings.
+ui/vendor/** -text -whitespace

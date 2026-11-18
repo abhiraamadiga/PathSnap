@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PathSnap · Route reconstruction</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="vendor/leaflet/leaflet.css">
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="vendor/leaflet/leaflet.js"></script>
+  <script type="module" src="app.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="./" aria-label="PathSnap home"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M5 25V15a6 6 0 0 1 6-6h10a6 6 0 0 1 6 6v2"/><circle cx="5" cy="25" r="3"/><circle cx="27" cy="20" r="3"/></svg><span>PathSnap</span><span class="brand-caption">GPS → road routes</span></a>
+    <div class="top-right"><span id="connection-pill" class="pill"><i></i>Not connected</span><a id="api-docs" hidden target="_blank" rel="noopener">API docs ↗</a></div>
+  </header>
+  <div class="shell">
+    <aside class="sidebar" aria-label="Connection and trip controls">
+      <div class="eyebrow">EVALUATOR WORKSPACE</div>
+      <h1>Find the road<br>behind the GPS.</h1>
+      <p class="intro">Select a trip. Reconstruct its route. Inspect the results.</p>
+      <section class="side-card">
+        <h2><span class="step">1</span>Connect to Laptop 1</h2>
+        <form id="connection-form">
+          <label for="api-url">API address</label>
+          <input id="api-url" type="url" placeholder="http://192.168.1.10:8000" required spellcheck="false" autocomplete="off">
+          <button id="connect-button" class="secondary" type="submit">Connect</button>
+        </form>
+        <p id="connection-help" class="helper">Use the address of the laptop running the API.</p>
+      </section>
+      <section class="side-card">
+        <h2><span class="step">2</span>Choose a trip</h2>
+        <label for="trip-select">Trip ID</label>
+        <select id="trip-select" disabled><option>Connect to load trips</option></select>
+        <p id="partition-note" class="helper">Trip options come from the API.</p>
+        <button id="run-button" class="primary" disabled><span id="run-label">Reconstruct route</span><span aria-hidden="true">↗</span></button>
+        <button id="cancel-button" class="text-button" hidden>Cancel request</button>
+        <p id="evaluation-gate" class="gate" hidden>Final evaluation is disabled on this server. Trip IDs are available for inspection.</p>
+      </section>
+      <div class="pipeline-note"><span class="eyebrow">PREDICTION PIPELINE</span><p>Random Forest <span>→</span> HMM / Viterbi</p><small>Reference labels stay on the API server.</small></div>
+    </aside>
+    <main>
+      <div class="workspace-heading"><div><span class="eyebrow">ROUTE EXPLORER</span><h2 id="result-title">Ready for a trip.</h2><p id="result-subtitle">Connect to the API to begin.</p></div><span id="mode-pill" class="mode-pill" hidden></span></div>
+      <div id="message" class="message" role="status" aria-live="polite" hidden></div>
+      <div id="progress" class="progress" role="status" aria-live="polite" hidden><span class="spinner" aria-hidden="true"></span><span>Matching GPS observations to the road network…</span></div>
+      <section class="metric-grid" aria-label="Prediction summary">
+        <article class="metric"><span>GPS observations</span><strong id="metric-gps">—</strong><small id="metric-gps-note">Original observation count</small></article>
+        <article class="metric"><span>Weak-reference agreement</span><strong id="metric-agreement">—</strong><small id="metric-agreement-note">Not verified GPS accuracy</small></article>
+        <article class="metric"><span>Route parts</span><strong id="metric-parts">—</strong><small>Breaks remain separate</small></article>
+        <article class="metric"><span>Prediction runtime</span><strong id="metric-time">—</strong><small>Model + route reconstruction</small></article>
+      </section>
+      <section class="map-card" aria-label="Geographical route map">
+        <div class="map-toolbar"><div class="legend"><label><input id="layer-gps" type="checkbox" checked disabled><span class="dot gps"></span>GPS points</label><label><input id="layer-route" type="checkbox" checked disabled><span class="line route"></span>Predicted route</label></div><button id="fit-button" class="small-button" disabled>Fit route</button></div>
+        <div class="map-wrap"><div id="map" aria-label="GPS and reconstructed road route"></div><div id="map-empty" class="map-empty"><div class="empty-symbol" aria-hidden="true">⌁</div><strong>Your route will appear here</strong><p>Choose a trip and run reconstruction.</p></div></div>
+        <div class="map-footer"><span id="map-summary">Local vector layers · no external basemap loaded</span><label class="basemap-label"><input id="basemap-toggle" type="checkbox">Online street basemap (OpenStreetMap)</label></div>
+      </section>
+      <section id="evaluation-card" class="evaluation-card" hidden>
+        <div class="section-heading"><h3>Evaluation results</h3><span id="scoring-status" class="tag"></span></div>
+        <p id="evaluation-note" class="helper"></p>
+        <div class="detail-grid"><div><span>Classifier agreement</span><strong id="eval-classifier">—</strong></div><div><span>Reference coverage</span><strong id="eval-coverage">—</strong></div><div><span>Route edit similarity</span><strong id="eval-sequence">—</strong></div><div><span>Road overlap F1</span><strong id="eval-overlap">—</strong></div></div>
+        <div class="result-actions"><details><summary>Request & diagnostics</summary><dl id="diagnostics"></dl></details><button id="download-button" class="small-button" disabled>Download result JSON</button></div>
+      </section>
+      <footer class="page-footer">Real API inference. Explicit route breaks. No reference labels in this interface.</footer>
+    </main>
+  </div>
+</body>
+</html>

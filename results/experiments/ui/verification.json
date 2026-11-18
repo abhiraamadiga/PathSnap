@@ -1,0 +1,23 @@
+{
+  "python_tests": 51,
+  "javascript_tests": 8,
+  "browser": "Brave",
+  "verification_scope": "local UI and real API on one machine; physical two-laptop link remains unverified",
+  "browser_checks": {
+    "development_registry_ten_trips": true,
+    "development_predictions_displayed": true,
+    "connection_failure_handled": true,
+    "trip_change_clears_results_and_download": true,
+    "loading_controls_disable_inputs": true,
+    "local_cancellation_feedback": true,
+    "gps_layer_toggle": true,
+    "real_evaluator_registry_ten_ids": true,
+    "evaluator_reconstruct_button_disabled": true
+  },
+  "browser_download_completed": false,
+  "evaluator_inference_run": false,
+  "screenshots": {
+    "development-preview.jpg": "0478f648a6c0bbaae8f56bd3013ab86d15c11ce9856241986e205b2db1264236",
+    "evaluator-disabled.jpg": "2952984c67f786730f8643bcd756a7cbfc7be4ca04c1f29efa567eb7f2ab9c14"
+  }
+}
