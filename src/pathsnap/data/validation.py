@@ -92,7 +92,7 @@ def main():
     args.output.mkdir(parents=True, exist_ok=True)
     (args.output/'inventory.json').write_text(json.dumps(summary, indent=2)+'\n')
     with (args.output/'inventory.csv').open('w', newline='') as stream:
-        writer = csv.DictWriter(stream, fieldnames=results[0].keys())
+        writer = csv.DictWriter(stream, fieldnames=results[0].keys(), lineterminator='\n')
         writer.writeheader()
         writer.writerows({**r, 'issues': json.dumps(r['issues']), 'gps_bounds': json.dumps(r['gps_bounds'])} for r in results)
     print(json.dumps({k:v for k,v in summary.items() if k != 'trips'}, indent=2))
