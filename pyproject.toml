@@ -11,6 +11,8 @@ requires-python = ">=3.11"
 dependencies = []
 
 [project.optional-dependencies]
+export = ["packaging>=24"]
+inference = ["numpy>=1.26,<3", "scipy>=1.13,<2", "pyproj>=3.6,<4", "scikit-learn>=1.5,<2", "joblib>=1.4,<2", "threadpoolctl>=3,<4"]
 optimization = ["optuna>=4,<5"]
 models = ["scikit-learn>=1.5,<2", "joblib>=1.4,<2", "threadpoolctl>=3,<4"]
 features = ["numpy>=1.26,<3", "scipy>=1.13,<2", "pyproj>=3.6,<4"]

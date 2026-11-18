@@ -1,0 +1,22 @@
+{
+  "bundle_version": "v0.1.0",
+  "bundle_directory": "artifacts/releases/pathsnap-v0.1.0",
+  "archive": "artifacts/releases/pathsnap-v0.1.0.zip",
+  "archive_bytes": 2644076,
+  "archive_sha256": "9e4bdc0bd42ff16a8b10974078a2555039f4de6e6463bad694bd3d255648215c",
+  "model_sha256": "184aac35a35367198f920be784c98a31d40b789dc036345bac3651122a6e2378",
+  "runtime_versions": {
+    "certifi": "2026.10.23",
+    "cloudpickle": "3.1.2",
+    "joblib": "1.6.0",
+    "narwhals": "2.29.0",
+    "numpy": "2.5.5",
+    "pyproj": "3.8.0",
+    "scikit-learn": "1.9.1",
+    "scipy": "1.18.1",
+    "threadpoolctl": "3.8.0"
+  },
+  "python_version": "3.14.4",
+  "reference_data_included": false,
+  "base_git_revision": "f95e13da4a6e078d0c5d41185043e62f2f457eca"
+}

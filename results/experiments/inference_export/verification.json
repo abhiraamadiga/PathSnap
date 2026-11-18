@@ -1,0 +1,85 @@
+{
+  "archive_sha256": "9e4bdc0bd42ff16a8b10974078a2555039f4de6e6463bad694bd3d255648215c",
+  "verification_mode": "isolated Python subprocess per trip; no original repository imports",
+  "raw_input_types": [
+    "track",
+    "nodes",
+    "arcs"
+  ],
+  "reference_files_present": false,
+  "trips": [
+    {
+      "trip_id": "00000000",
+      "observations": 2503,
+      "predictions_match_step8": true,
+      "route_parts_match_step8": true,
+      "prediction_seconds": 2.5871141759998864
+    },
+    {
+      "trip_id": "00000007",
+      "observations": 1354,
+      "predictions_match_step8": true,
+      "route_parts_match_step8": true,
+      "prediction_seconds": 1.2657232920028036
+    },
+    {
+      "trip_id": "00000009",
+      "observations": 1049,
+      "predictions_match_step8": true,
+      "route_parts_match_step8": true,
+      "prediction_seconds": 1.7062185579998186
+    },
+    {
+      "trip_id": "00000040",
+      "observations": 2995,
+      "predictions_match_step8": true,
+      "route_parts_match_step8": true,
+      "prediction_seconds": 3.4903089389990782
+    },
+    {
+      "trip_id": "00000052",
+      "observations": 262,
+      "predictions_match_step8": true,
+      "route_parts_match_step8": true,
+      "prediction_seconds": 0.45498577499893145
+    },
+    {
+      "trip_id": "00000056",
+      "observations": 3958,
+      "predictions_match_step8": true,
+      "route_parts_match_step8": true,
+      "prediction_seconds": 7.027679309998348
+    },
+    {
+      "trip_id": "00000065",
+      "observations": 768,
+      "predictions_match_step8": true,
+      "route_parts_match_step8": true,
+      "prediction_seconds": 1.5318639770011941
+    },
+    {
+      "trip_id": "00000076",
+      "observations": 1486,
+      "predictions_match_step8": true,
+      "route_parts_match_step8": true,
+      "prediction_seconds": 4.940775045997725
+    },
+    {
+      "trip_id": "00000077",
+      "observations": 3911,
+      "predictions_match_step8": true,
+      "route_parts_match_step8": true,
+      "prediction_seconds": 4.425077683001291
+    },
+    {
+      "trip_id": "00000091",
+      "observations": 874,
+      "predictions_match_step8": true,
+      "route_parts_match_step8": true,
+      "prediction_seconds": 1.4517282630004047
+    }
+  ],
+  "total_observations": 19160,
+  "all_predictions_match": true,
+  "all_route_parts_match": true
+}

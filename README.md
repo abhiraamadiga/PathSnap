@@ -4,7 +4,7 @@ Map matching and route reconstruction from noisy vehicle GPS observations.
 
 ## Status
 
-Dataset validation, EDA, preprocessing, candidate generation, feature auditing and five-model experiments are implemented. Random Forest is selected as the untuned baseline using trip-grouped CV; a ten-trial TPE search and matched untuned/tuned development comparison are complete. Metrics measure weak-reference agreement, not verified GPS ground truth. HMM/Viterbi reconstruction and development comparisons are implemented. Inference-asset export, API and UI remain pending. Fitted model binaries are generated locally and are not tracked in Git.
+Dataset validation, EDA, preprocessing, candidate generation, feature auditing and five-model experiments are implemented. Random Forest is selected as the untuned baseline using trip-grouped CV; a ten-trial TPE search and matched untuned/tuned development comparison are complete. Metrics measure weak-reference agreement, not verified GPS ground truth. HMM/Viterbi reconstruction and development comparisons are implemented. Inference-asset export is implemented; API and UI remain pending. Fitted model binaries are generated locally and are not tracked in Git.
 
 ## Local setup
 
@@ -81,3 +81,7 @@ The reserved evaluator ZIP is available for final evaluation only; see [data-iso
 ## HMM/Viterbi reconstruction (Step 8)
 
 See [decoder method and reproduction](docs/hmm-viterbi.md) and [measured results including failures](docs/hmm-results.md). The selected runtime settings are in `configs/hmm.json`. Evaluator data remains excluded; the ten committed route maps show development trips only.
+
+## Inference bundle (Step 9)
+
+See [export, standalone prediction and verification](docs/inference-export.md). Export a versioned model/config/runtime ZIP with `python -m pathsnap.inference.export --version v0.1.0` after installing `.[inference,export]`. The verified release contains no datasets or reference labels; the supplied bundle requires Python 3.14 and its pinned dependencies.
