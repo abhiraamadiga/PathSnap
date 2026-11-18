@@ -1,0 +1,55 @@
+# PathSnap
+
+Map matching and route reconstruction from noisy vehicle GPS observations.
+
+## Status
+
+Initial scaffold only. Data processing, models, decoding, API and UI are not implemented. No experimental results or trained artifacts are included.
+
+## Local setup
+
+Requires Python 3.11 or newer. From the repository root:
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -e .
+```
+
+The package currently has no runtime dependencies. Add dependencies as components are implemented. The original material remains in the sibling `Provided_Material` folder; datasets are not committed.
+
+## Structure
+
+| Folder | Responsibility |
+| --- | --- |
+| `configs/` | Reproducible experiment and inference configuration |
+| `data/raw/`, `data/processed/` | Local source data and derived datasets (ignored) |
+| `notebooks/` | Exploration and supporting experiments |
+| `src/pathsnap/data/` | Parsing, validation and preprocessing |
+| `src/pathsnap/features/` | Candidate generation and feature engineering |
+| `src/pathsnap/models/` | Training and model comparison |
+| `src/pathsnap/optimization/` | Bayesian hyperparameter search |
+| `src/pathsnap/decoding/` | HMM and Viterbi reconstruction |
+| `src/pathsnap/evaluation/` | Classification and route metrics; isolated reference scoring |
+| `src/pathsnap/visualization/` | Folium maps and result plots |
+| `api/`, `ui/` | FastAPI backend and evaluator interface |
+| `scripts/`, `tests/` | Workflow commands and verification |
+| `artifacts/` | Local model/preprocessing/decoder assets (ignored initially) |
+| `results/experiments/`, `results/figures/`, `results/maps/` | Actual logs, plots and interactive maps |
+| `docs/report/` | Consolidated technical report sources and final PDF |
+
+## Required workflow
+
+Explore and validate data; engineer candidates/features; compare at least five models; select using measured results; perform Bayesian tuning; compare classifier-only and HMM/Viterbi routes; export inference assets; implement API/UI; test deployment; complete report. See [requirements checklist](docs/requirements-checklist.md).
+
+Use 80 training trips for fitting and group-aware cross-validation and 10 student-testing trips for development comparisons. The 10 reserved evaluator trips are final-evaluation-only. Never feed evaluator labels into prediction or expose them to the UI.
+
+## Planned two-laptop deployment
+
+Laptop 1 will host FastAPI, trained assets, road networks, HMM/Viterbi and isolated server-side scoring. Laptop 2 will run the UI, list ten evaluation trips and submit a selected trip ID over the network. It will display the returned route and metrics. Set its API URL to Laptop 1's reachable LAN address; `.env.example` documents proposed settings only.
+
+No run commands or endpoints exist yet. Add exact startup commands and network setup when implemented. Demonstrate real requests for all ten trips and show receiving-laptop API logs.
+
+## Submission
+
+Deliver a public GitHub repository and one consolidated PDF report. Commit all implementation code and genuine experimental evidence. Generated model binaries are ignored during development; explicitly arrange their versioned delivery subject to repository size limits before submission. Do not commit secrets or evaluator ground truth. Every team member must understand and explain the work.
