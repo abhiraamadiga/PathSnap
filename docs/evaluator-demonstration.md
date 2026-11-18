@@ -27,6 +27,13 @@ source .venv/bin/activate
 python -m pathsnap.ui --host 127.0.0.1 --port 8502 --api-url http://127.0.0.1:8001
 ```
 
+On Windows, run the UI directly from the checkout with PowerShell and a working Python 3.11 or newer. Replace `LAPTOP1_IP` with the address that served `/readyz` on this laptop.
+
+```powershell
+$env:PYTHONPATH = "$PWD\src"
+python -m pathsnap.ui --host 127.0.0.1 --port 8502 --api-url http://LAPTOP1_IP:8001
+```
+
 Open `http://127.0.0.1:8502` and choose a trip from Trips. For the two-laptop setup, bind the API to `0.0.0.0` on the API laptop and use its reachable LAN address in the UI command instead of `127.0.0.1`. Keep the UI open from its localhost address on the second laptop. Match the allowlist to its actual browser origin.
 
 ## Training and scoring

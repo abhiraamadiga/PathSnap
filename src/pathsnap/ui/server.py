@@ -17,6 +17,13 @@ def handler_for(directory,api_url):
     directory=Path(directory).resolve();api_url=api_address(api_url)
     if not (directory/'index.html').is_file():raise FileNotFoundError('UI assets not found; set --directory to the project ui folder')
     class Handler(SimpleHTTPRequestHandler):
+        # Module loading needs a JavaScript MIME type regardless of OS associations.
+        extensions_map = {
+            **SimpleHTTPRequestHandler.extensions_map,
+            '.js': 'text/javascript',
+            '.mjs': 'text/javascript',
+        }
+
         def __init__(self,*args,**kwargs):super().__init__(*args,directory=str(directory),**kwargs)
         def end_headers(self):
             self.send_header('Cache-Control','no-store');self.send_header('X-Content-Type-Options','nosniff')
