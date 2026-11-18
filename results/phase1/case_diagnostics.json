@@ -1,0 +1,28 @@
+[
+  {
+    "partition": "train",
+    "trip_id": "00000011",
+    "network_bounds_lon_lat": [
+      59.637048,
+      56.031815,
+      60.025979,
+      56.077438
+    ],
+    "gps_outside_network_bbox": 0,
+    "observations": 2828,
+    "note": "Bounding box is a coarse geometry diagnostic, not a road-distance or label-validity test."
+  },
+  {
+    "partition": "train",
+    "trip_id": "00000054",
+    "network_bounds_lon_lat": [
+      4.837612,
+      52.275905,
+      4.98401,
+      52.43489
+    ],
+    "gps_outside_network_bbox": 0,
+    "observations": 19313,
+    "note": "Bounding box is a coarse geometry diagnostic, not a road-distance or label-validity test."
+  }
+]
