@@ -65,3 +65,7 @@ See [EDA findings and reproduction commands](docs/eda-findings.md) for partition
 ## Phase 1 review
 
 Install `pip install -e ".[eda,features]"` for preprocessing and EDA dependencies. See [phase-one review](docs/phase1-review.md) for feature auditing, coverage diagnostics, maps and the demonstration checklist.
+
+## Model experiments
+
+See [five-model experiment design](docs/model-experiments.md) and [measured results](docs/model-results.md). Install the `models` extra along with `eda,features`. All classification results measure weak geometric reference labels and require the limitations described in the report.

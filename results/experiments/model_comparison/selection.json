@@ -1,0 +1,6 @@
+{
+  "selected_model": "random_forest",
+  "primary_metric": "mean grouped-CV candidate Macro F1",
+  "scope": "baseline comparison with weak labels; training cap (null means full) recorded in manifest; not Bayesian tuned",
+  "reason": "Highest predeclared grouped-CV Macro F1; student-test scores were not used for selection."
+}
