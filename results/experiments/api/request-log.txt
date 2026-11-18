@@ -1,0 +1,65 @@
+INFO:     127.0.0.1:39926 - "GET /readyz HTTP/1.1" 200 OK
+2026-11-18 15:12:00,352 INFO request request_id=bf549e9d-8065-4235-b042-633a877668e2 method=GET path=/readyz status=200 duration_ms=1.15
+2026-11-18 15:12:00,358 INFO request request_id=306117ad-4f29-43fe-98bd-6947cc9ef142 method=GET path=/trips status=200 duration_ms=0.95
+INFO:     127.0.0.1:39926 - "GET /trips HTTP/1.1" 200 OK
+2026-11-18 15:12:00,370 INFO request request_id=e5f31856-d78a-4160-ae74-7d02e970113f method=POST path=/predict status=404 duration_ms=4.66
+INFO:     127.0.0.1:39926 - "POST /predict HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:39926 - "POST /predict HTTP/1.1" 422 Unprocessable Content
+2026-11-18 15:12:00,380 INFO request request_id=a979937d-4744-41d7-8d45-6998effaceff method=POST path=/predict status=422 duration_ms=1.62
+INFO:     127.0.0.1:39926 - "POST /predict HTTP/1.1" 422 Unprocessable Content
+2026-11-18 15:12:00,388 INFO request request_id=1ed2378f-7022-4501-9f7a-2a48bb801176 method=POST path=/predict status=422 duration_ms=1.03
+2026-11-18 15:12:00,395 INFO inference_started request_id=ce7e98c1-f8ce-4e0b-82b4-562fee5caedc trip_id=00000000
+2026-11-18 15:12:03,130 INFO inference_complete request_id=ce7e98c1-f8ce-4e0b-82b4-562fee5caedc trip_id=00000000 observations=2503
+2026-11-18 15:12:03,130 INFO reference_scoring_started request_id=ce7e98c1-f8ce-4e0b-82b4-562fee5caedc trip_id=00000000
+2026-11-18 15:12:03,717 INFO request request_id=ce7e98c1-f8ce-4e0b-82b4-562fee5caedc method=POST path=/predict status=200 duration_ms=3322.62
+INFO:     127.0.0.1:39926 - "POST /predict HTTP/1.1" 200 OK
+2026-11-18 15:12:03,739 INFO inference_started request_id=f6476115-a5d4-4fb6-b72e-06d406875764 trip_id=00000007
+2026-11-18 15:12:05,018 INFO inference_complete request_id=f6476115-a5d4-4fb6-b72e-06d406875764 trip_id=00000007 observations=1354
+2026-11-18 15:12:05,018 INFO reference_scoring_started request_id=f6476115-a5d4-4fb6-b72e-06d406875764 trip_id=00000007
+2026-11-18 15:12:05,240 INFO request request_id=f6476115-a5d4-4fb6-b72e-06d406875764 method=POST path=/predict status=200 duration_ms=1501.94
+INFO:     127.0.0.1:39926 - "POST /predict HTTP/1.1" 200 OK
+2026-11-18 15:12:05,254 INFO inference_started request_id=c8a48ae0-12db-4602-8c8c-846a808ff663 trip_id=00000009
+2026-11-18 15:12:07,021 INFO inference_complete request_id=c8a48ae0-12db-4602-8c8c-846a808ff663 trip_id=00000009 observations=1049
+2026-11-18 15:12:07,021 INFO reference_scoring_started request_id=c8a48ae0-12db-4602-8c8c-846a808ff663 trip_id=00000009
+2026-11-18 15:12:07,453 INFO request request_id=c8a48ae0-12db-4602-8c8c-846a808ff663 method=POST path=/predict status=200 duration_ms=2199.51
+INFO:     127.0.0.1:39926 - "POST /predict HTTP/1.1" 200 OK
+2026-11-18 15:12:07,464 INFO inference_started request_id=0ec0e600-72d3-477b-b6d9-c537f811af54 trip_id=00000040
+2026-11-18 15:12:10,903 INFO inference_complete request_id=0ec0e600-72d3-477b-b6d9-c537f811af54 trip_id=00000040 observations=2995
+2026-11-18 15:12:10,903 INFO reference_scoring_started request_id=0ec0e600-72d3-477b-b6d9-c537f811af54 trip_id=00000040
+2026-11-18 15:12:11,787 INFO request request_id=0ec0e600-72d3-477b-b6d9-c537f811af54 method=POST path=/predict status=200 duration_ms=4323.96
+INFO:     127.0.0.1:39926 - "POST /predict HTTP/1.1" 200 OK
+2026-11-18 15:12:11,812 INFO inference_started request_id=a22dda59-20c6-4d41-9768-a8f48f79f8d5 trip_id=00000052
+2026-11-18 15:12:12,257 INFO inference_complete request_id=a22dda59-20c6-4d41-9768-a8f48f79f8d5 trip_id=00000052 observations=262
+2026-11-18 15:12:12,257 INFO reference_scoring_started request_id=a22dda59-20c6-4d41-9768-a8f48f79f8d5 trip_id=00000052
+2026-11-18 15:12:12,361 INFO request request_id=a22dda59-20c6-4d41-9768-a8f48f79f8d5 method=POST path=/predict status=200 duration_ms=549.35
+INFO:     127.0.0.1:39926 - "POST /predict HTTP/1.1" 200 OK
+2026-11-18 15:12:12,367 INFO inference_started request_id=03b1df43-807e-4349-b30a-7339e3e77f8c trip_id=00000056
+2026-11-18 15:12:19,132 INFO inference_complete request_id=03b1df43-807e-4349-b30a-7339e3e77f8c trip_id=00000056 observations=3958
+2026-11-18 15:12:19,133 INFO reference_scoring_started request_id=03b1df43-807e-4349-b30a-7339e3e77f8c trip_id=00000056
+2026-11-18 15:12:21,044 INFO request request_id=03b1df43-807e-4349-b30a-7339e3e77f8c method=POST path=/predict status=200 duration_ms=8677.26
+INFO:     127.0.0.1:39926 - "POST /predict HTTP/1.1" 200 OK
+2026-11-18 15:12:21,077 INFO inference_started request_id=9d566771-c9f3-45c4-a7a6-cf08b7864e2b trip_id=00000065
+2026-11-18 15:12:22,444 INFO inference_complete request_id=9d566771-c9f3-45c4-a7a6-cf08b7864e2b trip_id=00000065 observations=768
+2026-11-18 15:12:22,444 INFO reference_scoring_started request_id=9d566771-c9f3-45c4-a7a6-cf08b7864e2b trip_id=00000065
+2026-11-18 15:12:22,757 INFO request request_id=9d566771-c9f3-45c4-a7a6-cf08b7864e2b method=POST path=/predict status=200 duration_ms=1680.98
+INFO:     127.0.0.1:39926 - "POST /predict HTTP/1.1" 200 OK
+2026-11-18 15:12:22,767 INFO inference_started request_id=9f1b6745-b57c-4f36-9973-1cd266385182 trip_id=00000076
+2026-11-18 15:12:27,164 INFO inference_complete request_id=9f1b6745-b57c-4f36-9973-1cd266385182 trip_id=00000076 observations=1486
+2026-11-18 15:12:27,164 INFO reference_scoring_started request_id=9f1b6745-b57c-4f36-9973-1cd266385182 trip_id=00000076
+2026-11-18 15:12:28,295 INFO request request_id=9f1b6745-b57c-4f36-9973-1cd266385182 method=POST path=/predict status=200 duration_ms=5528.56
+INFO:     127.0.0.1:39926 - "POST /predict HTTP/1.1" 200 OK
+2026-11-18 15:12:28,309 INFO inference_started request_id=ce897150-c752-4f35-9c5a-046645d3575c trip_id=00000077
+2026-11-18 15:12:32,467 INFO inference_complete request_id=ce897150-c752-4f35-9c5a-046645d3575c trip_id=00000077 observations=3911
+2026-11-18 15:12:32,467 INFO reference_scoring_started request_id=ce897150-c752-4f35-9c5a-046645d3575c trip_id=00000077
+2026-11-18 15:12:33,091 INFO request request_id=ce897150-c752-4f35-9c5a-046645d3575c method=POST path=/predict status=200 duration_ms=4783.26
+INFO:     127.0.0.1:39926 - "POST /predict HTTP/1.1" 200 OK
+2026-11-18 15:12:33,125 INFO inference_started request_id=9cf10598-bc09-4908-ae56-47587e24e73d trip_id=00000091
+2026-11-18 15:12:34,577 INFO inference_complete request_id=9cf10598-bc09-4908-ae56-47587e24e73d trip_id=00000091 observations=874
+2026-11-18 15:12:34,577 INFO reference_scoring_started request_id=9cf10598-bc09-4908-ae56-47587e24e73d trip_id=00000091
+2026-11-18 15:12:34,890 INFO request request_id=9cf10598-bc09-4908-ae56-47587e24e73d method=POST path=/predict status=200 duration_ms=1765.36
+INFO:     127.0.0.1:39926 - "POST /predict HTTP/1.1" 200 OK
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+2026-11-18 15:13:35,921 INFO service_stopped
+INFO:     Application shutdown complete.
+INFO:     Finished server process [60175]

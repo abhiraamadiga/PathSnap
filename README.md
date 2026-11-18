@@ -4,7 +4,7 @@ Map matching and route reconstruction from noisy vehicle GPS observations.
 
 ## Status
 
-Dataset validation, EDA, preprocessing, candidate generation, feature auditing and five-model experiments are implemented. Random Forest is selected as the untuned baseline using trip-grouped CV; a ten-trial TPE search and matched untuned/tuned development comparison are complete. Metrics measure weak-reference agreement, not verified GPS ground truth. HMM/Viterbi reconstruction and development comparisons are implemented. Inference-asset export is implemented; API and UI remain pending. Fitted model binaries are generated locally and are not tracked in Git.
+Dataset validation, EDA, preprocessing, candidate generation, feature auditing and five-model experiments are implemented. Random Forest is selected as the untuned baseline using trip-grouped CV; a ten-trial TPE search and matched untuned/tuned development comparison are complete. Metrics measure weak-reference agreement, not verified GPS ground truth. HMM/Viterbi reconstruction and development comparisons are implemented. Inference-asset export and FastAPI serving with separate server-side aggregate scoring are implemented. UI and physical two-laptop integration remain pending. Fitted model binaries are generated locally and are not tracked in Git.
 
 ## Local setup
 
@@ -48,7 +48,7 @@ Use 80 training trips for fitting and group-aware cross-validation and 10 studen
 
 Laptop 1 will host FastAPI, trained assets, road networks, HMM/Viterbi and isolated server-side scoring. Laptop 2 will run the UI, list ten evaluation trips and submit a selected trip ID over the network. It will display the returned route and metrics. Set its API URL to Laptop 1's reachable LAN address; `.env.example` documents proposed settings only.
 
-API/UI startup commands, endpoints and network setup will be documented when implemented. Demonstrate real requests for all ten trips and show receiving-laptop API logs.
+API startup and endpoints are documented in `docs/api.md`; UI startup and physical LAN integration remain pending. Demonstrate real requests for all ten trips and show receiving-laptop API logs.
 
 ## Submission
 
@@ -85,3 +85,7 @@ See [decoder method and reproduction](docs/hmm-viterbi.md) and [measured results
 ## Inference bundle (Step 9)
 
 See [export, standalone prediction and verification](docs/inference-export.md). Export a versioned model/config/runtime ZIP with `python -m pathsnap.inference.export --version v0.1.1` after installing `.[inference,export]`. The verified release contains no datasets or reference labels; the supplied bundle requires Python 3.14 and its pinned dependencies.
+
+## FastAPI backend (Step 10)
+
+See [API setup, public contract, evaluation modes and logs](docs/api.md). Start with `python -m pathsnap.api` after installing the pinned bundle/API dependencies. Endpoints are `/healthz`, `/readyz`, `/trips` and `/predict`. Default serving uses development trips; evaluator inference remains disabled until the full system is frozen.
