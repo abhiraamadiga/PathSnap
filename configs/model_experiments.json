@@ -1,0 +1,32 @@
+{
+  "seed": 42,
+  "cv_folds": 3,
+  "max_training_observations_per_trip": null,
+  "selection_metric": "cv_macro_f1",
+  "probability_threshold": 0.5,
+  "threads": 4,
+  "models": {
+    "logistic_regression": {
+      "C": 1.0,
+      "max_iter": 1000
+    },
+    "gaussian_nb": {
+      "var_smoothing": 1e-09
+    },
+    "decision_tree": {
+      "max_depth": 12,
+      "min_samples_leaf": 10
+    },
+    "random_forest": {
+      "n_estimators": 80,
+      "max_depth": 14,
+      "min_samples_leaf": 5
+    },
+    "hist_gradient_boosting": {
+      "max_iter": 100,
+      "max_leaf_nodes": 15,
+      "learning_rate": 0.1,
+      "early_stopping": false
+    }
+  }
+}

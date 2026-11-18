@@ -1,0 +1,31 @@
+{
+  "model": "gaussian_nb",
+  "family": "probabilistic",
+  "configuration": {
+    "var_smoothing": 1e-09
+  },
+  "classification": {
+    "accuracy": 0.8647734489328216,
+    "macro_precision": 0.7736513074006425,
+    "macro_recall": 0.8989289156919762,
+    "macro_f1": 0.8082004357873656,
+    "log_loss": 0.5966480090481612,
+    "confusion_matrix": [
+      [
+        50989,
+        9189
+      ],
+      [
+        606,
+        11650
+      ]
+    ]
+  },
+  "sequence": {
+    "weak_reference_top1": 0.8841135214483771,
+    "accepted_reference_observations": 12262,
+    "directly_continuous_pairs": 17141,
+    "eligible_consecutive_pairs": 19149,
+    "direct_route_continuity": 0.8951381273173534
+  }
+}
