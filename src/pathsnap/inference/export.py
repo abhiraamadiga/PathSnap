@@ -32,14 +32,14 @@ def runtime_versions():
     return dict(sorted(versions.items()))
 
 
-def export_bundle(project_root,model_path,output_root,version):
+def export_bundle(project_root,model_path,output_root,version,*,model_config_path=None):
     project_root=Path(project_root).resolve();model_path=Path(model_path).resolve();output_root=Path(output_root).resolve()
     if not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9._-]{0,63}',version):raise ValueError('Invalid bundle version')
     name='pathsnap-'+version;destination=output_root/name;archive=output_root/(name+'.zip')
     if destination.exists() or archive.exists():raise FileExistsError('Release already exists; choose a new version')
     config_root=project_root/'configs'
     preprocessing=json.loads((config_root/'preprocessing.json').read_text());hmm=json.loads((config_root/'hmm.json').read_text())
-    selected=json.loads((config_root/'tuned_model.json').read_text())
+    selected=json.loads(Path(model_config_path or config_root/'tuned_model.json').read_text())
     if not model_path.is_file():raise FileNotFoundError('Regenerate the Step 7 tuned model before exporting')
     output_root.mkdir(parents=True,exist_ok=True)
     stage=Path(tempfile.mkdtemp(prefix='.'+name+'-',dir=output_root));zip_tmp=stage.parent/(stage.name+'.zip')

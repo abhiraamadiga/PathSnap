@@ -1,0 +1,31 @@
+{
+  "stage": "retrained_training_trip_cv",
+  "model_name": "random_forest",
+  "model_parameters": {
+    "n_estimators": 80,
+    "max_depth": 12,
+    "min_samples_leaf": 12,
+    "max_features": "sqrt",
+    "random_state": 42,
+    "n_jobs": 4
+  },
+  "feature_columns": [
+    "distance_m",
+    "projection_fraction",
+    "arc_length_m",
+    "heading_difference_rad",
+    "heading_available",
+    "speed_m_s",
+    "dt_s",
+    "previous_distance_m",
+    "candidate_rank",
+    "gap_reset"
+  ],
+  "positive_class": 1,
+  "candidate_binary_threshold": 0.5,
+  "observation_selection": "argmax of positive-class candidate probability, retaining original arc IDs",
+  "training_observation_cap_per_trip": null,
+  "training_trip_groups_with_usable_labels": 79,
+  "selection_metric": "Grouped training CV mean-trip weak-reference Top-1. Required gain over incumbent: 0.1 percentage points.",
+  "evidence": "results/experiments/random_forest_retraining/selection.json"
+}

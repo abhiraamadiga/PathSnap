@@ -99,3 +99,5 @@ See [UI setup, data boundaries and verification](docs/ui.md). Start Laptop 2 wit
 See [local verification and two-laptop instructions](docs/deployment.md). All ten development trips reproduce 19,160 earlier predictions and aggregate scores. Browser/UI, asset and CORS checks pass locally. Physical two-laptop verification is deferred; final evaluator inference has not been run.
 
 The [decoder refinement](docs/hmm-results.md#decoder-refinement-v012) raises pooled development weak-reference agreement to 92.42%. The API defaults to inference bundle v0.1.2.
+
+For the ten demonstration trips from the supplied evaluator archive, see [evaluator demo setup and scoring](docs/evaluator-demonstration.md). This uses a separate evaluator API configuration and a frozen model release.
