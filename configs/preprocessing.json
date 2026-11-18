@@ -1,0 +1,8 @@
+{
+  "candidate_radius_m": 75.0,
+  "max_candidates": 8,
+  "sample_spacing_m": 50.0,
+  "gap_reset_s": 60.0,
+  "reference_radius_m": 75.0,
+  "reference_margin_m": 5.0
+}

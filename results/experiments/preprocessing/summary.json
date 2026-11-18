@@ -1,0 +1,47 @@
+{
+  "config": {
+    "candidate_radius_m": 75.0,
+    "max_candidates": 8,
+    "sample_spacing_m": 50.0,
+    "gap_reset_s": 60.0,
+    "reference_radius_m": 75.0,
+    "reference_margin_m": 5.0
+  },
+  "features": [
+    "distance_m",
+    "projection_fraction",
+    "arc_length_m",
+    "heading_difference_rad",
+    "heading_available",
+    "speed_m_s",
+    "dt_s",
+    "previous_distance_m",
+    "candidate_rank",
+    "gap_reset"
+  ],
+  "label_method": "nearest reference arc with abstention; weak labels, not verified ground truth",
+  "trip_counts": {
+    "student_test": 10,
+    "train": 80
+  },
+  "totals": {
+    "train": {
+      "observations": 208417,
+      "candidate_rows": 1241685,
+      "no_candidates": 13608,
+      "accepted_weak_labels": 128237,
+      "weak_label_candidate_misses": 1413,
+      "ambiguous_reference": 59350,
+      "reference_too_far": 20830
+    },
+    "student_test": {
+      "observations": 19160,
+      "candidate_rows": 125519,
+      "no_candidates": 0,
+      "accepted_weak_labels": 12262,
+      "weak_label_candidate_misses": 6,
+      "ambiguous_reference": 6882,
+      "reference_too_far": 16
+    }
+  }
+}
