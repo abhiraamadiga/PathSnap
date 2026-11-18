@@ -1,0 +1,32 @@
+{
+  "model": "decision_tree",
+  "family": "tree",
+  "configuration": {
+    "max_depth": 12,
+    "min_samples_leaf": 10
+  },
+  "classification": {
+    "accuracy": 0.9566225805560924,
+    "macro_precision": 0.9236714513013462,
+    "macro_recall": 0.9216864438480029,
+    "macro_f1": 0.9226749919286786,
+    "log_loss": 0.14203444987634253,
+    "confusion_matrix": [
+      [
+        58643,
+        1535
+      ],
+      [
+        1607,
+        10649
+      ]
+    ]
+  },
+  "sequence": {
+    "weak_reference_top1": 0.8802805415103572,
+    "accepted_reference_observations": 12262,
+    "directly_continuous_pairs": 16713,
+    "eligible_consecutive_pairs": 19149,
+    "direct_route_continuity": 0.8727870907096976
+  }
+}
